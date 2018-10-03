@@ -45,7 +45,7 @@
 			  <label for="inputPassword2Signup" class="sr-only">Пароль еще раз</label>
 			  <input type="password" id="inputPassword2Signup" class="form-control" placeholder="Пароль" required>
 		  </div>
-		  <p class="mb-1">Не используйте пароли, которые Вы везде используйте.</p>
+		  <p class="mb-1">Не используйте пароли, которые Вы везде используете.</p>
 		  <div class="row">
 				<div class="col-12">
 					<div class="alert alert-dismissible fade show" role="alert"></div>

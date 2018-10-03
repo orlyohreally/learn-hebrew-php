@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require '../includes/connect.php';
 if(!isset($_POST['login']) || !isset($_POST['password'])){
 	echo '{"status": "error", "msg": "Укажите обязательные поля"}';

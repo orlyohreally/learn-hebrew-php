@@ -12,7 +12,7 @@
 					
 				}
 				else {//авторизован
-					echo '<li class="nav-item"><a class = "nav-link" href="#">Мои тесты</a></li>';
+					//echo '<li class="nav-item"><a class = "nav-link" href="#">Мои тесты</a></li>';
 					echo '<li class="nav-item"><a class = "nav-link" href="logout">Выйти</a></li>';
 					
 				}
