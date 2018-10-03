@@ -31,9 +31,6 @@
 				case 'words':
 					include 'module/words.php';
 					break;
-				case 'word_form':
-					include 'module/word_form.php';
-					break;
 				case 'verbs':
 					include 'module/verbs.php';
 					break;
@@ -61,11 +58,9 @@
 				case 'login':
 					require 'js/login_scripts.php';
 					break;
-				case 'word_form':
-					require 'js/word_form_scripts.php';
-					break;
 				case 'words':
 					echo '<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>';
+					require 'js/words_scripts.php';
 					require 'js/datatable_scripts.js';
 					break;
 				case 'verbs':

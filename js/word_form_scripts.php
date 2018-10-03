@@ -1,5 +1,5 @@
 <script>
-	$("#word_form").on('submit', function(e){console.log('word='+$("#word_input").val()+'&translation='+$("#translation_input").val()+'&gender='+$("#gender_input").val() + '&plural=' + $("#plural_input").val() + '&pl_translation=' + $("#pl_translation_input").val() + '&password='+$("#password_input").val()<?php if(isset($_GET['id'])) echo "+'&id='+".$_GET['id'];?>);
+	$("#word_form").on('submit', function(e){
 		e.preventDefault();
 		console.log('word='+$("#word_input").val()+'&translation='+$("#translation_input").val()+'&gender='+$("#gender_input").val() + '&plural=' + $("#plural_input").val() + '&pl_translation=' + $("#pl_translation_input").val() + '&exception_id=' + $("#exception_id_input").val()<?php if(isset($_GET['id'])) echo "+'&id='+".$_GET['id'];?>);
 		$.ajax({

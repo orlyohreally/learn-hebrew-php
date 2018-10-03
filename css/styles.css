@@ -8,6 +8,17 @@ html, body {
 .hebrew {
 	font-family: 'David Libre', serif;
 }
+.link {
+	color: #0275d8;
+}
+.link:hover {
+	color: #014c8c;
+	text-decoration: underline;
+	cursor: pointer;
+}
+form {
+	margin: 0;
+}
 h1, h2, h3, h4, h5 {
     text-align: center;
 	color: #000000;
