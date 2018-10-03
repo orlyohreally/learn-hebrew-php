@@ -1,11 +1,19 @@
 ﻿<?php
+session_start();
 require '../includes/connect.php';
-if(!isset($_POST['password']) || !isset($_POST['word']) || !isset($_POST['translation']) || !isset($_POST['gender'])){
-	echo '{"status": "error", "msg": "Не указаны необходимые значения"}';
+if(isset($_SESSION['user_id'])) {
+	$list = $conn->query('select w.id from webuser w, role r where w.role_id = r.id and w.id = '.$_SESSION['user_id'].' and r.id = 1');
+	if(mysqli_num_rows($list) != 1) {
+		echo '{"status": "error", "msg": "Нет прав для обновления этих данных"}';
+		die();
+	}
+}
+else {
+	echo '{"status": "error", "msg": "Для данного действия необходимо авторизаваться"}';
 	die();
 }
-if(!isset($_POST['password']) || $_POST['password'] != "it is orly") {
-	echo '{"status": "error", "msg": "Неверный пароль"}';
+if(!isset($_POST['word']) || !isset($_POST['translation']) || !isset($_POST['gender'])){
+	echo '{"status": "error", "msg": "Не указаны необходимые значения"}';
 	die();
 }
 $res = [];

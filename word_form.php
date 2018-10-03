@@ -75,10 +75,6 @@ include 'menu.php';
 					<label for="pl_translation_input">Перевод мн.ч.</label>
 					<input type="text" value = '<?php echo $plural_translation;?>' class="form-control" id="pl_translation_input" aria-describedby="Перевод мн.ч." placeholder="Перевод мн.ч.">
 				</div>
-				<div class="form-group">
-					<label for="password_input">Пароль</label>
-					<input type="text" class="form-control" id="password_input" aria-describedby="Пароль" placeholder="Пароль">
-				</div>
 				<div class="text-center">
 					<div class="alert alert-dismissible fade show" role="alert"></div>
 					<?php
