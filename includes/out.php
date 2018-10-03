@@ -3,6 +3,12 @@
 		case '':
 			$out = 'main';
 			break;
+		case 'login':
+			$out = 'login';
+			break;
+		case 'logout':
+			$out = 'logout';
+			break;
 		case 'words':
 			$out = 'words';
 			break;

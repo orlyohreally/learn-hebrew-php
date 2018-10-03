@@ -71,6 +71,24 @@ create table verb (
 insert into verb (ms, fs, mp, fp, translation, form_id) values ('לוֹמד' ,'לוֹמדת', 'לוֹמדים', 'לוֹמדוֹת', 'учит', 1);
 
 
+create table role (
+	id int not null auto_increment,
+	name varchar(200) not  null,
+	primary key (id)
+);
+insert into role (name) values ('admin');
+insert into role (name) values ('user');
+
+create table webuser (
+	id int not null auto_increment,
+	username varchar(50) not  null,
+	password varchar(200) not  null,
+	role_id int not  null,
+	primary key (id),
+	foreign key (role_id) references role(id)
+);
+
+
 
 /*
 #051C3B

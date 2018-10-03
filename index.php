@@ -1,7 +1,8 @@
 <?php
+	require 'includes/check_role.php';
 	require 'includes/connect.php';
 	$par = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-	require 'includes/out.php';			
+	require 'includes/out.php';	
 ?>
 <html>
     <head>
@@ -20,6 +21,12 @@
 			switch($out) {
 				case 'main':
 					include 'main.php';
+					break;
+				case 'login':
+					include 'login.php';
+					break;
+				case 'logout':
+					include 'logout.php';
 					break;
 				case 'words':
 					include 'words.php';
@@ -48,6 +55,9 @@
 				case 'main':
 					require'js/scripts.php';
 					break;
+				case 'login':
+					require 'js/login_scripts.php';
+					break;
 				case 'word_form':
 					require 'js/word_form_scripts.php';
 					break;
@@ -63,8 +73,6 @@
 					echo '<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>';
 					require 'js/datatable_scripts.js';
 					break;
-				default:
-					include '404.php';
 			}
 		?>
     </body>

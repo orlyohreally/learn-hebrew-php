@@ -73,3 +73,11 @@ table th, table td {
 #answer-area .alert {
 	visibility: hidden;
 }
+
+
+/***************/
+/*  Login/Signup   */
+/**************/
+#signup-container {
+	display: none;
+}
