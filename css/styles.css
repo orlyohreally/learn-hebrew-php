@@ -1,0 +1,75 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+.hebrew {
+	font-family: 'David Libre', serif;
+}
+h1, h2, h3, h4, h5 {
+    text-align: center;
+	color: #000000;
+}
+button:hover {
+	cursor: pointer;
+
+}
+.navbar-brand {
+	width: fit-content;
+	width: -moz-fit-content;
+}
+.navbar-brand img {
+	height: 40px;
+	width: auto;
+}
+.carousel-caption h3 {
+	color: #ffffff;
+}
+/*.carousel-indicators li {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.carousel-indicators li.active {
+	background-color: #000000;
+}*/
+.carousel .carousel-control img{
+	height: 10%;
+	width: auto;
+}
+
+@media (min-width: 767px) {
+	.carousel .carousel-control img{
+		height: 15%;
+		width: auto;
+	}
+}
+/*table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead {
+    background: #eee;
+}
+table th, table td {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: center;
+}*/
+
+/***************/
+/*  Training   */
+/**************/
+#training {
+	margin: 20px;
+	display: none;
+}
+#training .list-group {
+	margin-bottom: 10px;
+}
+#answer-area {
+	margin-top: 10px;
+}
+#answer-area .alert {
+	visibility: hidden;
+}
