@@ -1,7 +1,6 @@
 <?php
-require 'includes/connect.php';
-?>
-<?php include 'menu.php'; ?>
+	require 'includes/connect.php';
+	include 'menu.php'; ?>
 <div id="page_content">
 	<div id="slider" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">

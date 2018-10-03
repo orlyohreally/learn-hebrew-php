@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require '../includes/connect.php';
 if(!isset($_POST['type'])){
 	echo '{"status": "error", "msg": "Не указан тип задания"}';

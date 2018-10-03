@@ -6,7 +6,7 @@ utils.showNotif = function(notif, msg, type = 'success', t = 500) {
 	$(notif).css({'visibility': 'visible'});
 	if(t > 0) {
 		setTimeout(function(){
-			$(notif).removeClass('alert-' + type);
+			$(notif).removeClass('alert-' + type).html('');
 			$(notif).css({'visibility': 'hidden'});
 		}, t);
 	}

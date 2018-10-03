@@ -21,6 +21,9 @@
 		case 'nouns-exceptions':
 			$out = 'nouns_exceptions';
 			break;
+		case 'my-lists':
+			$out = 'word_lists';
+			break;
 		default:
 			$out = '';
 	}

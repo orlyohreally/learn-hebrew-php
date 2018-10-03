@@ -20,25 +20,28 @@
 		<?php
 			switch($out) {
 				case 'main':
-					include 'main.php';
+					include 'module/main.php';
 					break;
 				case 'login':
-					include 'login.php';
+					include 'module/login.php';
 					break;
 				case 'logout':
-					include 'logout.php';
+					include 'module/logout.php';
 					break;
 				case 'words':
-					include 'words.php';
+					include 'module/words.php';
 					break;
 				case 'word_form':
-					include 'word_form.php';
+					include 'module/word_form.php';
 					break;
 				case 'verbs':
-					include 'verbs.php';
+					include 'module/verbs.php';
 					break;
 				case 'nouns_exceptions':
-					include 'nouns_exceptions.php';
+					include 'module/nouns_exceptions.php';
+					break;
+				case 'word_lists':
+					include 'module/word_lists.php';
 					break;
 				default:
 					include '404.php';

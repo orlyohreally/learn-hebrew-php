@@ -88,6 +88,22 @@ create table webuser (
 	foreign key (role_id) references role(id)
 );
 
+create table webuser_list (
+	id int not null auto_increment,
+	webuser_id int not null,
+	name varchar(50) not null,
+	primary key (id),
+	foreign key (webuser_id) references webuser(id)
+);
+create table word_list (
+	id int not null auto_increment,
+	webuser_list_id int not null,
+	word_id int not null,
+	added timestamp default now(),
+	primary key (id),
+	foreign key (word_id) references word(id),
+	foreign key (webuser_list_id) references webuser_list(id)
+);
 
 
 /*
