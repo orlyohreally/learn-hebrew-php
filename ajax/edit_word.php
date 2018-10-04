@@ -12,7 +12,7 @@ else {
 	echo '{"status": "error", "msg": "Для данного действия необходимо авторизаваться"}';
 	die();
 }
-if(!isset($_POST['word']) || !isset($_POST['translation']) || !isset($_POST['gender'])){
+if(!isset($_POST['word']) || !isset($_POST['translation']) || !isset($_POST['partofspeech'])){
 	echo '{"status": "error", "msg": "Не указаны необходимые значения"}';
 	die();
 }
@@ -25,7 +25,15 @@ else
 	$id = 0;
 $word = addslashes($_POST['word']);
 $translation = addslashes($_POST['translation']);
-$gender = addslashes($_POST['gender']);
+$partofspeech = addslashes($_POST['partofspeech']);
+if(isset($_POST['gender']))
+	$gender = addslashes($_POST['gender']);
+else
+	$gender = '';
+if(isset($_POST['comment']))
+	$comment = addslashes($_POST['comment']);
+else
+	$comment = '';
 if(isset($_POST['plural']))
 	$plural = addslashes($_POST['plural']);
 else
@@ -39,7 +47,7 @@ if(isset($_POST['exception_id']))
 else
 	$exception_id = 0;
 if($id == 0) {
-	if($list = $conn->query('insert into word (word, translation, gender, plural, plural_translation, exception_id) values (lower("'.$word.'"), lower("'.$translation.'"), "'.$gender.'", lower("'.$plural.'"), lower("'.$pl_translation.'"), '. ($exception_id > 0 ? $exception_id : 'null') .')')) {
+	if($list = $conn->query('insert into word (word, translation, gender, plural, plural_translation, exception_id, part_of_speech, comment) values (lower("'.$word.'"), lower("'.$translation.'"), "'.$gender.'", lower("'.$plural.'"), lower("'.$pl_translation.'"), '. ($exception_id > 0 ? $exception_id : 'null').', "'.$partofspeech.'"'.', "'.$comment.'"'.')')) {
 		$res['status'] = 'success';
 		$res['msg'] = 'Слово успешно добавлено';
 	}
@@ -47,7 +55,7 @@ if($id == 0) {
 		$res['msg'] = $conn->error;
 }
 else {
-	if($list = $conn->query('update word set word = lower("'.$word.'"), translation = lower("'.$translation.'"), gender = "'.$gender.'", plural = lower("'.$plural.'"), plural_translation = lower("'.$pl_translation.'"), exception_id = '.($exception_id > 0 ? $exception_id : 'null').' where id = '.$id)) {
+	if($list = $conn->query('update word set word = lower("'.$word.'"), translation = lower("'.$translation.'"), gender = "'.$gender.'", plural = lower("'.$plural.'"), comment = "'.$comment.'", part_of_speech = "'.$partofspeech.'", plural_translation = lower("'.$pl_translation.'"), exception_id = '.($exception_id > 0 ? $exception_id : 'null').' where id = '.$id)) {
 		$res['status'] = 'success';
 		$res['msg'] = 'Слово успешно обновлено';
 	}

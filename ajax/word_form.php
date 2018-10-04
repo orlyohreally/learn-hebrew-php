@@ -17,6 +17,8 @@
 			$plural_translation = $row['plural_translation'];
 			$exception_id = $row['exception_id'];
 			$exception = $row['exception'];
+			$part_of_speech = $row['part_of_speech'];
+			$comment = $row['comment'];
 		}
 		else {
 			$word = '';
@@ -26,6 +28,8 @@
 			$plural_translation = '';
 			$exception_id = '';
 			$exception = '';
+			$part_of_speech = '';
+			$comment = '';
 		}
 	}
 
@@ -52,42 +56,57 @@
 					<form id="word_form">
 						<div class="form-group">
 							<label for="word_input">Слово</label>
-							<input type="text" value = '<?php echo $word?>' class="form-control" id="word_input" aria-describedby="Слово" placeholder="Слово">
+							<input type="text" required value = '<?php echo $word?>' class="form-control" id="word_input" aria-describedby="Слово" placeholder="Слово">
+						</div>
+						<div class="row">
+							<div class="form-group col-12 col-md-8">
+								<label for="partofspeech_input">Часть речи</label>
+								<select rows="2" id="partofspeech_input" aria-describedby="Часть речи" class="form-control">
+									<option <?php if ($part_of_speech=='noun') echo 'selected'; ?> value="noun">Существительное</option>
+									<option <?php if ($part_of_speech=='adj') echo 'selected'; ?> value="adj">Прилагательное</option>
+								</select>
+							</div>
+							<div class="form-group col-12 col-md-4">
+								<label for="gender_input">Род</label>
+								<select id="gender_input" aria-describedby="Род" class="form-control">
+									<option <?php if ($gender=='f') echo 'selected'; ?> value="f">Ж</option>
+									<option <?php if ($gender=='m') echo 'selected'; ?> value="m">М</option>
+								</select>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="translation_input">Перевод</label>
-							<input type="text" value = '<?php echo $translation;?>' class="form-control" id="translation_input" aria-describedby="Перевод" placeholder="Перевод">
+							<input type="text" required value = '<?php echo $translation;?>' class="form-control" id="translation_input" aria-describedby="Перевод" placeholder="Перевод">
 						</div>
-						<div class="form-group">
-							<label for="gender_input">Род</label>
-							<select rows="2" id="gender_input" aria-describedby="Род" class="form-control">
-								<option <?php if ($gender=='f') echo 'selected'; ?> value="f">Женский род</option>
-								<option <?php if ($gender=='m') echo 'selected'; ?> value="m">Мужской род</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="plural_input">Множественное число</label>
-							<input type="text" value = '<?php echo $plural;?>' class="form-control" id="plural_input" aria-describedby="Множественное число" placeholder="Множественное число">
-						</div>
-						<div class="form-group">
-							<label for="exception_id_input">Исключение</label>
-							<select id="exception_id_input" aria-describedby="Исключение" class="form-control">
-								<option value="">Не исключение</option>
-							<?php
-									if($res = $conn->query('select * from pl_exception')) {
-										while($row = $res->fetch_assoc()) {
-											echo '<option ';
-											if ($exception_id==$row['id'])
-												echo 'selected ';
-											echo 'value="'.$row['id'].'">'.$row['name'].'</option>';
+						<div class="row">
+							<div class="form-group col-12 col-md-7">
+								<label for="plural_input">Множественное число</label>
+								<input type="text" value = '<?php echo $plural;?>' class="form-control" id="plural_input" aria-describedby="Множественное число" placeholder="Множественное число">
+							</div>
+							<div class="form-group col-12 col-md-5">
+								<label for="exception_id_input">Исключение</label>
+								<select id="exception_id_input" aria-describedby="Исключение" class="form-control">
+									<option value="">Не исключение</option>
+								<?php
+										if($res = $conn->query('select * from pl_exception')) {
+											while($row = $res->fetch_assoc()) {
+												echo '<option ';
+												if ($exception_id==$row['id'])
+													echo 'selected ';
+												echo 'value="'.$row['id'].'">'.$row['name'].'</option>';
+											}
 										}
-									}
-							?>
-							</select>
+								?>
+								</select>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="pl_translation_input">Перевод мн.ч.</label>
 							<input type="text" value = '<?php echo $plural_translation;?>' class="form-control" id="pl_translation_input" aria-describedby="Перевод мн.ч." placeholder="Перевод мн.ч.">
+						</div>
+						<div class="form-group">
+							<label for="comment_textarea">Примечание</label>
+							<textarea class="form-control" id="comment_textarea" aria-describedby="Примечание" placeholder="Примечание"><?php echo $comment;?></textarea>
 						</div>
 						<div class="text-center">
 							<div class="alert alert-dismissible fade show" role="alert"></div>

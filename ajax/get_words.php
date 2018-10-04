@@ -10,16 +10,16 @@ $words = [];
 $q = '';
 $res = [];
 $res['status'] = 'error';
-if($list = $conn->query('select word, translation from word order by rand() limit '.$word_count)) {
+if($list = $conn->query('select word, comment, translation from word order by rand() limit '.$word_count)) {
 	$i = random_int(1, $word_count);
 	while($row = $list->fetch_assoc()) {
 		if($word_count > 1) {
-			$words[] = $tasktype == 'he-ru' ? $row['translation'] : $row['word'];
+			$words[] = $tasktype == 'he-ru' ? $row['translation'] : $row['word'].' '.$row['comment'];
 			if(sizeof($words) == $i)
-				$q = $tasktype == 'he-ru' ? $row['word'] :$row['translation'];
+				$q = $tasktype == 'he-ru' ? $row['word'] :$row['translation'].' '.$row['comment'];
 		}
 		else {
-			$q = $tasktype == 'he-ru' ? $row['word'] :$row['translation'];
+			$q = $tasktype == 'he-ru' ? $row['word'] :$row['translation'].' '.$row['comment'];
 		}
 	}
 	$words[] = $q;

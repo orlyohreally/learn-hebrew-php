@@ -16,7 +16,7 @@ create table word (
 	plural varchar(200),
 	plural_translation varchar(200),
 	part_of_speech varchar(50),
-	comment varchar(200),
+	comment varchar(200) CHARACTER SET utf8 ,
 	exception_id int,
 	primary key (id),
 	foreign key exception_id references pl_exception(id)

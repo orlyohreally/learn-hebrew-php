@@ -9,7 +9,6 @@
 				dataType: 'text',
 				url: 'ajax/word_form.php',
 				success: function(data) {
-					console.log(data);
 					$(".modal-content").html(data);
 					$(".modal").modal('show');
 

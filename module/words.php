@@ -24,11 +24,11 @@
 				</thead>
 				<tbody>
 				<?php
-					if($list = $conn->query('select id, word, translation, gender, plural, plural_translation from word order by word, translation')) {
+					if($list = $conn->query('select id, word, comment, translation, gender, plural, plural_translation, part_of_speech from word order by word, translation')) {
 						while($row = $list->fetch_assoc()) {
 							echo '<tr><td>'.$row['translation'].'</td>';
-							echo '<td class="hebrew link" oid="'.$row['id'].'">'.$row['word'];
-							if($row['gender'] != '') {
+							echo '<td class="hebrew link" oid="'.$row['id'].'">'.$row['word'].(isset($row['comment']) ? ' '.$row['comment'] : '');
+							if($row['part_of_speech']=='noun' && $row['gender'] != '') {
 								echo ' ('.($row['gender'] == 'm' ? 'м.р.' : ($row['gender'] == 'f' ? 'ж.р.' : '')).')';
 							}
 							echo '</td>';
