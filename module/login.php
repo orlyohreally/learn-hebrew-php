@@ -3,7 +3,7 @@
 	include 'menu.php';
 ?>
 <div id="login-container" class="container text-center">
-	<div class="form-row col-10 offset-1 col-md-8 offset-md-2">
+	<div class="form-row col-10 offset-1 col-md-10 offset-md-1">
 		<form id="login-form" class="mt-5 mb-5">
 		  <!--<img class="mb-4" src="img/logo.png" alt="" width="72" height="72">-->
 			<div class="form-group">

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require '../includes/connect.php';
 if(isset($_SESSION['user_id'])) {

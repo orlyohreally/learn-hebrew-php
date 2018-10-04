@@ -14,7 +14,7 @@ if($list = $conn->query('select word, comment, translation from word order by ra
 	$i = random_int(1, $word_count);
 	while($row = $list->fetch_assoc()) {
 		if($word_count > 1) {
-			$words[] = $tasktype == 'he-ru' ? $row['translation'] : $row['word'].' '.$row['comment'];
+			$words[] = $tasktype == 'he-ru' ? $row['translation'] : $row['word'];
 			if(sizeof($words) == $i)
 				$q = $tasktype == 'he-ru' ? $row['word'] :$row['translation'].' '.$row['comment'];
 		}
