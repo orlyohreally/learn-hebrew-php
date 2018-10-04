@@ -5,6 +5,16 @@ html, body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+.page-content {
+	padding-bottom: 20px;
+}
 .hebrew {
 	font-family: 'David Libre', serif;
 }
@@ -55,19 +65,26 @@ button:hover {
 		width: auto;
 	}
 }
-/*table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table thead {
-    background: #eee;
-}
-table th, table td {
-    border: 1px solid #000000;
-    padding: 10px;
-    text-align: center;
-}*/
 
+
+/***************/
+/*  Footer   */
+/**************/
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #292b2c;
+}
+.footer .copyright, .footer .copyright a {
+	color: #9e9e9e;
+}
+.footer .copyright a:hover {
+	color: #ffffff;
+}
 /***************/
 /*  Training   */
 /**************/
