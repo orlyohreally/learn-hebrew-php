@@ -25,7 +25,33 @@
 			include 'module/nouns_exceptions.php';
 			break;
 		case 'word_lists':
-			include 'module/word_lists.php';
+			if(isset($_SESSION['user_id'])) {
+				include 'module/word_lists.php';
+			}
+			else {
+				header('Location: /login');
+			}
+			break;
+		case 'word_list_details':
+			$list_name = $par[2];
+			if(isset($_SESSION['user_id'])) {
+				if($list = $conn->query('select id from webuser_list where webuser_id = '.$_SESSION['user_id'].' and name = "'.$list_name.'"')) {
+					$row = $list->fetch_assoc();
+					if(mysqli_num_rows($list) == 1) {
+						$list_id = $row['id'];
+						include 'module/word_list_details.php';
+					}
+					else {
+						include '404.php';
+					}
+				}
+				else
+					include '404.php';
+
+			}
+			else {
+				header('Location: /login');
+			}
 			break;
 		default:
 			include '404.php';

@@ -5,15 +5,15 @@
 	<a class="navbar-brand hebrew text-white" href="/">אני לומד עברית</a>
 	<div class="collapse navbar-collapse " id="navbarCollapse">
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item"><a class = "nav-link" href="words">Список слов</a></li>
+			<li class="nav-item"><a class = "nav-link" href="/words">Список слов</a></li>
 			<?php
 				if(!isset($_SESSION['user_id'])) {//неавторизован
-					echo '<li class="nav-item"><a class = "nav-link" href="login">Войти</a></li>';
+					echo '<li class="nav-item"><a class = "nav-link" href="/login">Войти</a></li>';
 					
 				}
 				else {//авторизован
-					//echo '<li class="nav-item"><a class = "nav-link" href="#">Мои тесты</a></li>';
-					echo '<li class="nav-item"><a class = "nav-link" href="logout">Выйти</a></li>';
+					echo '<li class="nav-item"><a class = "nav-link" href="/my-lists">Мои списки слов</a></li>';
+					echo '<li class="nav-item"><a class = "nav-link" href="/logout">Выйти</a></li>';
 					
 				}
 			?>

@@ -24,6 +24,9 @@
 		case 'my-lists':
 			$out = 'word_lists';
 			break;
+		case 'my-list':
+			$out = 'word_list_details';
+			break;
 		default:
 			$out = '';
 	}

@@ -66,9 +66,12 @@ button:hover {
 	}
 }
 
+.scrollable-table {
+	overflow: auto;
+}
 
-/***************/
-/*  Footer   */
+/****************/
+/*    Footer   */
 /**************/
 
 .footer {
@@ -79,13 +82,13 @@ button:hover {
   line-height: 60px;
   background-color: #292b2c;
 }
-.footer .copyright, .footer .copyright a {
+.footer .copyright {
 	color: #9e9e9e;
 }
-.footer .copyright a:hover {
+.footer .copyright a, .footer .copyright a:hover {
 	color: #ffffff;
 }
-/***************/
+/****************/
 /*  Training   */
 /**************/
 #training {
@@ -103,9 +106,20 @@ button:hover {
 }
 
 
-/***************/
+/********************/
 /*  Login/Signup   */
-/**************/
+/******************/
 #signup-container {
 	display: none;
+}
+
+
+/****************/
+/*  Word list  */
+/**************/
+.list-name {
+	text-decoration: underline;
+}
+.list-name:hover {
+	cursor: pointer;
 }

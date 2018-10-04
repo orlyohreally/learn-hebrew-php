@@ -6,6 +6,7 @@
 		</footer>
 		<script src = "../js/jquery.min.js"></script>
         <script src = "../js/bootstrap-4.min.js"></script>
+        <script src = "../js/bootbox.min.js"></script>
         <script src = "../js/utils.js"></script>
 		
 		<?php
@@ -20,6 +21,12 @@
 					echo '<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>';
 					require 'js/words_scripts.php';
 					require 'js/datatable_scripts.js';
+					break;
+				case 'word_lists':
+					require 'js/word_lists.php';
+					break;
+				case 'word_list_details':
+					require 'js/word_list_details.php';
 					break;
 				case 'verbs':
 					echo '<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>';

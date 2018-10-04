@@ -8,7 +8,7 @@
 		<?php
 			if($user_role == 'admin') {?>
 				<div class="col-12 text-right">
-				<button type="button" id="create_word" class="btn btn-primary">Добавить новое слово</button>
+					<button type="button" id="create_word" class="btn btn-primary">Добавить новое слово</button>
 				</div>
 			<?php }
 		?>

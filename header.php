@@ -7,7 +7,8 @@
 		<?php if($out == 'words' || $out == 'verbs' || $out == 'nouns_exceptions')
 				echo '<link href="../plugins/DataTables/datatables.min.css" rel="stylesheet">';
 		?>
-        <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">-->
+		<link rel="stylesheet" href="/plugins/fontawesome-free-5.3.1-web/css/all.min.css">
 		<title>אני לומד עברית</title>
 		<div class="page-content">
     </head>
