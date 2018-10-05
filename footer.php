@@ -25,6 +25,9 @@
 				case 'word_lists':
 					require 'js/word_lists.php';
 					break;
+				case 'training':
+					require 'js/training.php';
+					break;
 				case 'word_list_details':
 					require 'js/word_list_details.php';
 					break;

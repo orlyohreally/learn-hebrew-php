@@ -1,7 +1,13 @@
 ﻿<?php
+
+require '../includes/check_role.php';
 require '../includes/connect.php';
-if(!isset($_POST['type'])){
-	echo '{"status": "error", "msg": "Не указан тип задания"}';
+function update_training(&$conn, $answered, $word, $code) {
+	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" and word = "'.$word.'"';
+	$list = $conn->query($sql);
+}
+if(!isset($_POST['lang']) || !isset($_POST['code'])){
+	echo '{"status": "error", "msg": "Не указаны обязательные данные"}';
 	die();
 }
 if(!isset($_POST['word']) || !isset($_POST['answer'])){
@@ -9,37 +15,34 @@ if(!isset($_POST['word']) || !isset($_POST['answer'])){
 	die();
 }
 
-$tasktype = addslashes($_POST['type']);
+$lang = addslashes($_POST['lang']);
+$code = $_POST['code'];
 $word = addslashes($_POST['word']);
 $answer = addslashes($_POST['answer']);
 $res = [];
 $res['status'] = 'error';
 		
-if($tasktype == 'he-ru')
+if($lang == 'he-ru')
 	$sql = 'select word, translation from word where word = lower("'.$word.'")';
 else
 	$sql = 'select word, translation from word where translation = lower("'.$word.'")';
 
 if($list = $conn->query($sql)) {
 	if($row = $list->fetch_assoc()) {
-		$res['status'] = 'success';
-		if($tasktype == 'he-ru') {
-			if ($row['translation'] == mb_strtolower($answer)) {
-				$res['result'] = 'correct';
-			}
-			else {
-				$res['result'] = 'wrong';
-			}
+		$res['status'] = 'success';		
+		if($lang == 'he-ru') {
+			$answered = $row['translation'] == mb_strtolower($answer);
+			$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
+			$list = $conn->query($sql);
+			$res['result'] = $row['translation'] == mb_strtolower($answer) ? 'correct' : 'wrong';
 			$res['correct'] = $row['translation'];
 		}
 		else {
-			if ($row['word'] == mb_strtolower($answer)) {
-				$res['result'] = 'correct';
-			}
-			else {
-				$res['result'] = 'wrong';
-			}
-			$res['correct'] = $row['word'];
+			$answered = $row['word'] == mb_strtolower($answer);
+			$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
+			$list = $conn->query($sql);
+			$res['result'] = $row['word'] == mb_strtolower($answer) ? 'correct' : 'wrong';
+			$res['correct'] = $row['word'];	
 		}
 	}
 }

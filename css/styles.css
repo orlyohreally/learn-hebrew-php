@@ -31,7 +31,6 @@ form {
 }
 h1, h2, h3, h4, h5 {
     text-align: center;
-	color: #000000;
 }
 button:hover {
 	cursor: pointer;
@@ -69,7 +68,12 @@ button:hover {
 .scrollable-table {
 	overflow: auto;
 }
-
+.fas.fa-check {
+	color: green;
+}
+.fas.fa-times {
+	color: red;
+}
 /****************/
 /*    Footer   */
 /**************/
@@ -88,23 +92,6 @@ button:hover {
 .footer .copyright a, .footer .copyright a:hover {
 	color: #ffffff;
 }
-/****************/
-/*  Training   */
-/**************/
-#training {
-	margin: 20px;
-	display: none;
-}
-#training .list-group {
-	margin-bottom: 10px;
-}
-#answer-area {
-	margin-top: 10px;
-}
-#answer-area .alert {
-	visibility: hidden;
-}
-
 
 /********************/
 /*  Login/Signup   */
@@ -121,5 +108,12 @@ button:hover {
 	text-decoration: underline;
 }
 .list-name:hover {
+	cursor: pointer;
+}
+
+/***********************/
+/*  Training options  */
+/*********************/
+.trainig-option{
 	cursor: pointer;
 }

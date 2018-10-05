@@ -7,7 +7,7 @@ if(!isset($_POST['name'])) {
 }
 $res = [];
 $res['status'] = 'error';
-$res['msg'] = 'Ощибка!';
+$res['msg'] = 'Ошибка!';
 $name = addslashes($_POST['name']);
 if(isset($_SESSION['user_id'])) {
 	if($list = $conn->query('select count(*) from webuser_list where webuser_id = '.$_SESSION['user_id'].' and name = "'.$name.'"')) {

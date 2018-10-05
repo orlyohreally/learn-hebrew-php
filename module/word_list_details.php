@@ -11,6 +11,13 @@
 ?>
 <div class="container mt-5 mb-5">
 	<h1 class="list-name"><?php echo $list_name?></h1>
+	<?php if(!isset($_SESSION['user_id'])) { ?>
+	<div class="row">
+		<div class="col-12 text-center m-2">
+			<p>Авторизуйтесь, чтобы сохранять свои списки слов для тренировки.</p>
+		</div>
+	</div>
+	<?php }?>
 	<div class="row">
 		<div class="col-12 mt-4 mb-2 scrollable-table">
 			<table id="list" class="table table-striped table-bordered display nowrap" style="width:100%">
@@ -36,7 +43,7 @@
 	<div class="row">
 		<div class="col-12 text-center">
 			<div class="alert alert-dismissible fade show" role="alert"></div>
-			<button type="button" id="update_list" class="btn btn-primary mb-2">Обновить список</button>
+			<?if(isset($_SESSION['user_id'])) echo '<button type="button" id="update_list" class="btn btn-primary mb-2">Обновить список</button>';?>
 			<button type="button" id="start_training" class="btn btn-primary mb-2">Начать тренировку</button>
 		</div>
 	</div>

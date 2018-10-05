@@ -3,7 +3,7 @@ session_start();
 require '../includes/connect.php';
 $res = [];
 $res['status'] = 'error';
-$res['msg'] = 'Ощибка!';
+$res['msg'] = 'Ошибка!';
 if(isset($_SESSION['user_id'])) {
 	if(!isset($_POST['list_id'])){
 		echo '{"status": "error", "msg": "Не указан список"}';

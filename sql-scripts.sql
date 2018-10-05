@@ -106,6 +106,18 @@ create table word_list (
 	foreign key (webuser_list_id) references webuser_list(id)
 );
 
+drop table training;
+create table training (
+	id int not null auto_increment,
+	webuser_id int not null,
+	word_id int not null,
+	code varchar(5) not null,
+	tries int default 0,
+	answered boolean default false,
+	primary key (id),
+	foreign key (word_id) references word(id),
+	foreign key (webuser_id) references webuser(id)
+);
 
 /*
 #051C3B

@@ -27,6 +27,9 @@
 		case 'my-list':
 			$out = 'word_list_details';
 			break;
+		case 'training':
+			$out = 'training';
+			break;
 		default:
 			$out = '';
 	}
