@@ -2,46 +2,28 @@
 	require 'includes/connect.php';
 	include 'menu.php'; ?>
 <div id="page_content">
-	<!--<div id="slider" class="carousel slide" data-ride="carousel">
+	<div id="slider" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<li data-target="#slider" data-slide-to="1" class="active"></li>
 			<li data-target="#slider" data-slide-to="2"></li>
-			<li data-target="#slider" data-slide-to="3"></li>
-			<li data-target="#slider" data-slide-to="4"></li>
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active" style = "height: 400px;">
-			
-				<div class = "slider-img" style = "background: black url('img/slide-1.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
+				<div class = "slider-img" style = "background: black url('img/slide-4.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
 				<div class="carousel-caption d-md-block">
-					<h3>Тренировать перевод с русского на иврит (с выбором ответа)</h3>
-					<button type="button" class="btn btn-lg btn-primary" id="mchoice_ru-he">Начать</button>
-				</div>
-			</div>
-			
-			<div class="carousel-item" style = "height: 400px;">
-			
-				<div class = "slider-img"style = "background: black url('img/slide-2.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
-				<div class="carousel-caption d-md-block">
-					<h3>Тренировать перевод с иврита на русский (с выбором ответа)</h3>
-					<button type="button" class="btn btn-lg btn-primary" id="mchoice_he-ru">Начать</button>
+					<h3>Списки слов для тренировки</h3>
+					<p>Создавайте и сохраняйте свои списки слов для тренировок</p>
+					<a class="btn btn-lg btn-primary" href = "/my-lists" >Перейти</a>
 				</div>
 			</div>
 			<div class="carousel-item" style = "height: 400px;">
-				<div class = "slider-img"style = "background: black url('img/slide-3.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
+				<div class = "slider-img" style = "background: black url('img/slide-3.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
 				<div class="carousel-caption d-md-block">
-					<h3>Тренировать перевод с русского на иврит (ввод ответа)</h3>
-					<button type="button" class="btn btn-lg btn-primary" id="typein_ru-he">Начать</button>
+					<h3>Авторизация</h3>
+					<p>Регистрируйтесь, чтобы создавать свои списки слов</p>
+					<a class="btn btn-lg btn-primary" href = "/login" >Авторизоваться</a>
 				</div>
 			</div>
-			<div class="carousel-item" style = "height: 400px;">
-				<div class = "slider-img"style = "background: black url('img/slide-4.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
-				<div class="carousel-caption d-md-block">
-					<h3>Тренировать перевод с иврита на русский (ввод ответа)</h3>
-					<button type="button" class="btn btn-lg btn-primary" id="typein_he-ru">Начать</button>
-				</div>
-			</div>
-			
 		</div>
 		<a class="carousel-control carousel-control-prev" href="#slider" role="button" data-slide="prev">
 			<img src = "img/arrow2.png" style = "transform: rotate(180deg);"/>
@@ -51,7 +33,7 @@
 			<img src = "img/arrow2.png"/>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>-->
+	</div>
 	<div class="container mb-5 mt-5" id="lists">
 			<div class="row">
 				<div class="col-12">

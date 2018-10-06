@@ -30,10 +30,15 @@
 				ok: {
 					label: 'Создать',
 					className: 'btn-info',
-					callback: function() {
-						console.log($("#name_input").val());
-						if($("#name_input").val() != '')
+					callback: function() {						
+						if($("#name_input").val() != '' && /^[a-zA-Z0-9-]+$/i.test($("#name_input").val()))
 							create_list($("#name_input").val());
+						else if($("#name_input").val() == '') {
+							utils.showNotif($(".alert"), 'Укажите название списка', 'danger', 1500);
+						}
+						else if(!/^[a-zA-Z0-9-]+$/i.test($("#name_input").val())) {
+							utils.showNotif($(".alert"), 'Название может состоять только из латинских букв и цифр', 'danger', 1500);
+						}
 						return false;
 					}
 				}
