@@ -22,4 +22,10 @@
     <p class="card-text">Ввод перевода с клавиатуры</p>
   </div>
 </div>
+<div onclick="start_training('plural', 'he-he')" class="card trainig-option text-white bg-info mb-3">
+  <div class="card-header bg-info">Определение мн.ч. существительного</div>
+  <div class="card-body p-2">
+    <p class="card-text">Определение мн.ч. существительного</p>
+  </div>
+</div>
 <div id="choose-option" class="alert alert-dismissible fade show" role="alert"></div>

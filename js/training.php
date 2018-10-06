@@ -1,9 +1,9 @@
 <script>
-	function checkSelectedAnswer(lang) {
+	function checkSelectedAnswer(lang, task) {
 		const selected = $("#training .list-group-item.selected").html();
 		$.ajax({
 			method: 'POST',
-			data: 'lang='+lang+'&word='+$("#training .word").html() +'&answer='+selected + '&code="<?php echo $_GET['code']?>"',
+			data: 'task='+task+'&lang='+lang+'&word='+$("#training .word").html() +'&answer='+selected + '&code="<?php echo $_GET['code']?>"',
 			dataType: 'json',
 			url: 'ajax/check.php',
 			success: function(data) {
@@ -28,10 +28,10 @@
 			}
 		});
 	}
-	function checkTypeInAnswer(lang) {
+	function checkTypeInAnswer(lang, task) {
 		$.ajax({
 				method: 'POST',
-				data: 'lang='+lang+'&word='+$("#training .word").html() +'&answer='+$("#typed_in_answer").val() + '&code="<?php echo $_GET['code']?>"',
+				data: 'task='+task+'&lang='+lang+'&word='+$("#training .word").html() +'&answer='+$("#typed_in_answer").val() + '&code="<?php echo $_GET['code']?>"',
 				dataType: 'json',
 				url: 'ajax/check.php',
 				success: function(data) {
@@ -52,7 +52,7 @@
 			});
 	}
 	
-	function multichoice(lang, list) {
+	function multichoice(task, lang, list) {
 		$("#page_content").hide();
 		$("#training").show();
 		$("#training .training-container .task").html('<div class="list-group"></div>');
@@ -68,23 +68,23 @@
 		});
 		$("#answer").off('click');
 		$("#answer").click(function(){
-			checkSelectedAnswer(lang);
+			checkSelectedAnswer(lang, task);
 		});
 	
 	}
-	function spelling(lang, word) {
+	function spelling(task, lang, word) {
 		$("#page_content").hide();
 		$("#training").show();
 		$("#training .training-container .task").html('<div class="input-group mb-3"><input class="form-control" id="typed_in_answer" type="text" /></div>');
 		$("#training .word").html(word);
 		$("#answer").off('click');
 		$("#answer").click(function(){
-			checkTypeInAnswer(lang);
+			checkTypeInAnswer(lang, task);
 		});
 		$("#typed_in_answer").focus();
 		$("#typed_in_answer").keyup(function(e){
 			if(e.keyCode == 13)
-				checkTypeInAnswer(lang);
+				checkTypeInAnswer(lang, task);
 		});
 	}
 	function start_training() {
@@ -101,9 +101,9 @@
 				console.log('success', data);
 				if(data.words.length) {
 					if(task == 'multichoice')
-						multichoice(lang, data.words);
+						multichoice(task, lang, data.words);
 					else
-						spelling(lang, data.words[0])
+						spelling(task, lang, data.words[0])
 				}
 				else {
 					var results_html = '<div class="card"><ul class="list-group list-group-flush">';
