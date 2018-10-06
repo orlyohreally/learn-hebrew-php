@@ -126,5 +126,5 @@ create table training (
 #80A48E
 #EXEFEE
 */
-insert into users (username, id) values ('user', 2);
+insert into webuser (username, id, role_id) values ('user', 2, 2);
 insert into webuser_list (name, webuser_id) values ('generic', 2);

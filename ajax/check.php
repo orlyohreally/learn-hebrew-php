@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 require '../includes/check_role.php';
 require '../includes/connect.php';
 function update_training(&$conn, $answered, $word, $code) {

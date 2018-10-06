@@ -43,7 +43,7 @@
 	<div class="row">
 		<div class="col-12 text-center">
 			<div class="alert alert-dismissible fade show" role="alert"></div>
-			<?if(isset($_SESSION['user_id'])) echo '<button type="button" id="update_list" class="btn btn-primary mb-2">Обновить список</button>';?>
+			<?php if(isset($_SESSION['user_id'])) echo '<button type="button" id="update_list" class="btn btn-primary mb-2">Обновить список</button>';?>
 			<button type="button" id="start_training" class="btn btn-primary mb-2">Начать тренировку</button>
 		</div>
 	</div>

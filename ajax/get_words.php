@@ -53,11 +53,20 @@ if($task == 'multichoice' || $task == 'spelling') {
 	}
 }
 else {//plural
-	if($list = $conn->query('select w.id, word, plural, comment from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and part_of_speech = "noun" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit 1')) {
+	if($list = $conn->query('select w.id, word, plural, comment from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and part_of_speech = "noun" and plural is not null and plural != "" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit 1')) {
 		if($row = $list->fetch_assoc()) {
 			$words[] = $row['word'];
 			$res['words'] = $words;
 			$res['status'] = 'success';
+		}
+		else {
+			if($list = $conn->query('select w.id, word, comment, translation, tries, answered from word w, training t where w.id = t.word_id and part_of_speech = "noun" and plural is not null and plural != "" and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" order by answered, tries')) {
+				while($row = $list->fetch_assoc()) {
+					$results[] = $row;
+				}
+				$res['results'] = $results;
+				$res['status'] = 'success';
+			}
 		}
 	}
 }	
