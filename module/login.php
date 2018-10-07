@@ -19,7 +19,7 @@
 					<div class="alert alert-dismissible fade show" role="alert"></div>
 				</div>
 				<div class="col-12 col-md-6 mb-2">
-				  <button class="btn btn-lg btn-light btn-block" id="show_reg" type="button">Зарегестрироваться</button>
+				  <button class="btn btn-lg btn-info btn-block" id="show_reg" type="button">Зарегестрироваться</button>
 				</div>
 				<div class="col-12 col-md-6 mb-2">
 				  <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
@@ -52,7 +52,7 @@
 				</div>
 				
 				<div class="col-12 col-md-6 mb-2">
-				  <button class="btn btn-lg btn-light btn-block" id="show_log" type="button">Войти</button>
+				  <button class="btn btn-lg btn-info btn-block" id="show_log" type="button">Войти</button>
 				</div>
 				<div class="col-12 col-md-6 mb-2">
 				  <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегестрироваться</button>

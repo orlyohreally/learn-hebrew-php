@@ -37,12 +37,13 @@
 			}
 			break;
 		case 'word_list_details':
-			$list_name = isset($par[2]) ? $par[2] : '';
+			$list_slug = isset($par[2]) ? $par[2] : '';
 			/*if(isset($_SESSION['user_id'])) {*///not registered users can use generic word list
-				if($list = $conn->query('select id from webuser_list where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 2).' and name = "'.$list_name.'"')) {
+				if($list = $conn->query('select id, name from webuser_list where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 2).' and slug = "'.$list_slug.'"')) {
 					$row = $list->fetch_assoc();
 					if(mysqli_num_rows($list) == 1) {
 						$list_id = $row['id'];
+						$list_name = $row['name'];
 						include 'header.php';
 						include 'module/word_list_details.php';
 					}
@@ -59,6 +60,31 @@
 			else {
 				header('Location: /login');
 			}*/
+			break;
+		case 'rule_article':
+			$rule_slug = isset($par[2]) ? $par[2] : '';
+			if($rule_slug != '') {
+				if($list = $conn->query('select id from rule_article where slug = "'.$rule_slug.'"')) {
+					$row = $list->fetch_assoc();
+					if(mysqli_num_rows($list) == 1) {
+						$rule_article_id = $row['id'];
+						include 'header.php';
+						include 'module/rule_article.php';
+					}
+					else {
+						include 'header.php';
+						include '404.php';
+					}
+				}
+			}
+			else if($user_role == 'admin') {
+				include 'header.php';
+				include 'module/rule_article.php';
+			}
+			else {
+				include 'header.php';
+				include '404.php';
+			}
 			break;
 		case 'training':
 			include 'header.php';

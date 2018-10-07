@@ -1,0 +1,5 @@
+{
+    "require": {
+        "voku/urlify": "^4.0"
+    }
+}

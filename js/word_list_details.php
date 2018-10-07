@@ -72,7 +72,7 @@
 			success: function(data) {
 				console.log('success', data);
 				if(data.status == 'success') {
-					window.location.href = '/my-list/' + data.name
+					window.location.href = '/my-list/' + data.slug
 				}
 				else {
 					utils.showNotif($("#update-name .alert"), data.msg, 'danger', 600);
@@ -97,13 +97,11 @@
 					label: 'Обновить',
 					className: 'btn-info',
 					callback: function() {
-						if($("#name_input").val() != '' && /^[a-zA-Z0-9-]+$/i.test($("#name_input").val()))
-							update_list(old_name, $("#name_input").val());
-						else if($("#name_input").val() == '') {
+						if($("#name_input").val() == '') {
 							utils.showNotif($(".alert"), 'Укажите название списка', 'danger', 1500);
 						}
-						else if(!/^[a-zA-Z0-9-]+$/i.test($("#name_input").val())) {
-							utils.showNotif($(".alert"), 'Название может состоять только из латинских букв и цифр', 'danger', 1500);
+						else {
+							update_list(old_name, $("#name_input").val());
 						}
 						return false;
 					}

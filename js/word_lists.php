@@ -9,7 +9,7 @@
 					console.log('success', data);
 					if(data.status == 'success') {
 						console.log('yey');
-						window.location.href = '/my-list/' + data.name
+						window.location.href = '/my-list/' + data.slug
 					}
 					else {
 						utils.showNotif($(".alert"), data.msg, 'danger', 600);
@@ -31,13 +31,11 @@
 					label: 'Создать',
 					className: 'btn-info',
 					callback: function() {						
-						if($("#name_input").val() != '' && /^[a-zA-Z0-9-]+$/i.test($("#name_input").val()))
-							create_list($("#name_input").val());
-						else if($("#name_input").val() == '') {
+						if($("#name_input").val() == '') {
 							utils.showNotif($(".alert"), 'Укажите название списка', 'danger', 1500);
 						}
-						else if(!/^[a-zA-Z0-9-]+$/i.test($("#name_input").val())) {
-							utils.showNotif($(".alert"), 'Название может состоять только из латинских букв и цифр', 'danger', 1500);
+						else {
+							create_list($("#name_input").val());
 						}
 						return false;
 					}

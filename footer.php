@@ -39,6 +39,11 @@
 					echo '<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>';
 					require 'js/datatable_scripts.js';
 					break;
+				case 'rule_article':
+					echo '<script type="text/javascript" src="../plugins/markitup/jquery.markitup.js"></script>';
+					echo '<script type="text/javascript" src="../plugins/markitup/sets/default/set.js"></script>';
+					require 'js/rule_article_scripts.php';
+					break;
 			}
 		?>
     </body>

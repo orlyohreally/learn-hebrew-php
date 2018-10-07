@@ -93,6 +93,7 @@ create table webuser_list (
 	id int not null auto_increment,
 	webuser_id int not null,
 	name varchar(50) not null,
+	slug varchar(50) not null,
 	primary key (id),
 	foreign key (webuser_id) references webuser(id)
 );
@@ -128,3 +129,14 @@ create table training (
 */
 insert into webuser (username, id, role_id) values ('user', 2, 2);
 insert into webuser_list (name, webuser_id) values ('generic', 2);
+
+
+drop table rule_article;
+create table rule_article (
+	id int not null auto_increment,
+	title varchar(50) CHARACTER SET utf8 not null,
+	slug varchar(50) CHARACTER SET utf8 not null,
+	description varchar(100)  CHARACTER SET utf8 not null,
+	content varchar(1000) CHARACTER SET utf8 not null,
+	primary key (id)
+);

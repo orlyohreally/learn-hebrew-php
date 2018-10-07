@@ -15,7 +15,7 @@
 			
 			<div class="row">
 			<?php
-					if($list = $conn->query('select l.id, l.name, count(wl.id) from webuser_list l left join word_list wl on wl.webuser_list_id = l.id
+					if($list = $conn->query('select l.id, l.name, count(wl.id), slug from webuser_list l left join word_list wl on wl.webuser_list_id = l.id
 											where l.webuser_id = '.$_SESSION['user_id'].' group by l.id')) {
 						$list_id = 0;
 						while($row = $list->fetch_assoc()) {
@@ -27,7 +27,7 @@
 										<?php 
 											echo '<p class="card-text p-3">'. $row['count(wl.id)'].' сл. в тесте</p>';
 										?>
-										<a href="/my-list/<?php echo $row['name']; ?>" class="btn btn-primary">Перейти / Редактировать</a>
+										<a href="/my-list/<?php echo $row['slug']; ?>" class="btn btn-primary">Перейти / Редактировать</a>
 									</div>
 								</div>
 							</div>

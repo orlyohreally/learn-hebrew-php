@@ -74,6 +74,10 @@ button:hover {
 .fas.fa-times {
 	color: red;
 }
+
+.markItUp {
+	width: 100%!important;
+}
 /****************/
 /*    Footer   */
 /**************/

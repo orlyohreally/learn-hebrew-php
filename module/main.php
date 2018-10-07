@@ -1,6 +1,8 @@
 <?php
 	require 'includes/connect.php';
-	include 'menu.php'; ?>
+	include 'menu.php';
+	
+?>
 <div id="page_content">
 	<div id="slider" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -34,18 +36,22 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	<div class="container mb-5 mt-5" id="lists">
-			<div class="row">
-				<div class="col-12">
-					<h1 class="text-center">Списки слов</h1>
-				</div>
-			</div>
-			<div class="row">
-		
+	
 			<?php
 					if($list = $conn->query('select title, subtitle, description, url from page order by title, subtitle')) {
 						$form_id = 0;
+						$first = true;
 						while($row = $list->fetch_assoc()) {
+							if($first) {
+								echo '<div class="container mb-5 mt-5" id="lists">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center">Списки слов</h1>
+											</div>
+										</div>
+										<div class="row">';
+								$first = false;
+							}
 							?>
 							<div class="col-12 col-sm-6 mt-4 mb-2">
 								<div class="card text-center">
@@ -65,9 +71,50 @@
 							</div>
 							<?php
 						}
+						if(!$first)
+							echo '</div></div></div>';
 					}
-				?>
-			</div>
-		</div>
-	</div>
+			?>
+	
+		
+	
+			<?php
+					if($list = $conn->query('select slug, title, description from rule_article order by title')) {
+						$form_id = 0;
+						$first = true;
+						while($row = $list->fetch_assoc()) {
+							if($first) {
+								echo '<div class="container mb-5 mt-5" id="lists">
+										<div class="row">
+											<div class="col-12">
+												<h1 class="text-center">Правила</h1>
+											</div>
+										</div><div class="row">';
+								$first = false;
+							}
+							?>
+							<div class="col-12 col-sm-6 mt-4 mb-2">
+								<div class="card text-center">
+									<h5 class="card-header p-3"><?php echo $row['title']; ?></h5>
+									<div class="card-body p-2">
+										<?php 
+											if(isset($row['subtitle']))
+												echo '<h5 class="card-title p-3">'.$row['subtitle'].'</h5>';
+										?>
+										<?php 
+											if(isset($row['description']))
+												echo '<p class="card-text p-3">'. $row['description'].'</p>';
+										?>
+										<a href="<?php echo 'rule/'.$row['slug']; ?>" class="btn btn-primary">Читать</a>
+									</div>
+								</div>
+							</div>
+							<?php
+						}
+						if(!$first)
+							echo '</div></div></div>';
+					}
+			?>
+		
+	
 </div>

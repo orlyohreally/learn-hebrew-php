@@ -30,6 +30,9 @@
 		case 'training':
 			$out = 'training';
 			break;
+		case 'rule':
+			$out = 'rule_article';
+			break;
 		default:
 			$out = '';
 	}
