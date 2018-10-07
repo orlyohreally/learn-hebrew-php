@@ -70,6 +70,7 @@
 									<option <?php if ($part_of_speech=='prep') echo 'selected'; ?> value="prep">Предлог</option>
 									<option <?php if ($part_of_speech=='question') echo 'selected'; ?> value="question">Вопрос</option>
 									<option <?php if ($part_of_speech=='phrase') echo 'selected'; ?> value="phrase">Фраза</option>
+									<option <?php if ($part_of_speech=='numeric') echo 'selected'; ?> value="numeric">Числительное</option>
 								</select>
 							</div>
 							<div class="form-group col-12 col-md-4">

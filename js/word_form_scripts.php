@@ -1,6 +1,6 @@
 <script>
 	function pofspeech_changed() {
-		if($("#partofspeech_input").val() != 'noun') {
+		if($("#partofspeech_input").val() != 'noun' && $("#partofspeech_input").val() != 'numeric') {
 			$("#gender_input").parent().hide()
 			$("#gender_input").val('m');
 		}
