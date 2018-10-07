@@ -1,5 +1,5 @@
 # Learn Hebrew
-Learn Hebrew is a PHP 7 web-application to help with learning hebrew which offeres several types of tasks including multichoice, spelling and checking plural forms of nouns.
+Learn Hebrew is a PHP 7 web-application to help with learning Hebrew which offers several types of tasks including multiple choice, spelling and checking plural forms of nouns.
 
 ## Updates
 * added words and infinite quizzes to translate them from Russian to Hebrew and vice versa
