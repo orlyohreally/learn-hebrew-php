@@ -21,6 +21,7 @@
 	<div class="row mt-3 text-center">
 			<button type="button" onclick="check(this, 'noun', true);" class="btn btn-primary mb-2 ml-2user mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> сущ.</button>
 			<button type="button" onclick="check(this, 'verb', true);" class="btn btn-primary mb-2 mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> глаголы</button>
+			<button type="button" onclick="check(this, 'adj', true);" class="btn btn-primary mb-2 mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> прилаг.</button>
 			<button type="button" onclick="check(this, 'number', true);" class="btn btn-primary mb-2 mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> числительные</button>
 		
 	</div>
