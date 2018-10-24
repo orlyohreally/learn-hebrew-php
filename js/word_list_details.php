@@ -1,4 +1,10 @@
 <script>
+	function check(element, part_of_speech, check) {
+		$("input[type='checkbox'][part_of_speech='" + part_of_speech + "']").prop('checked', check);
+		$(element).attr('onclick', "check(this, '" + part_of_speech + "', "+ (!check) + ")");
+		$(element).children('span').removeClass(check ? 'fa-check' : 'fa-times').addClass(check ? 'fa-times' : 'fa-check');
+	}
+
 	function reset_list(list, list_id) {
 		$.ajax({
 			method: 'POST',
@@ -54,7 +60,6 @@
 		}
 	});
 	$("input.select-all").on('change', function() {
-		console.log('click', $(this).prop('checked'));
 		if($(this).prop('checked')) {
 			$("td input[oid]").prop('checked', true);
 		}

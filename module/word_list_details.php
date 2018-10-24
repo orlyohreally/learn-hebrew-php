@@ -2,7 +2,7 @@
 	require 'includes/connect.php';
 	include 'menu.php';
 	$words = [];
-	if($list = $conn->query('select w.id, w.word, w.translation, case wl.webuser_list_id when '.$list_id.' then "checked" else null end "check"
+	if($list = $conn->query('select w.id, w.word, part_of_speech, w.translation, case wl.webuser_list_id when '.$list_id.' then "checked" else null end "check"
 							from word w left join word_list wl on wl.word_id = w.id and (wl.webuser_list_id is null or wl.webuser_list_id = '.$list_id.') order by w.word, w.translation')) {
 		while($row = $list->fetch_assoc()) {
 			$words[] = $row;
@@ -18,6 +18,12 @@
 		</div>
 	</div>
 	<?php }?>
+	<div class="row mt-3 text-center">
+			<button type="button" onclick="check(this, 'noun', true);" class="btn btn-primary mb-2 ml-2user mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> сущ.</button>
+			<button type="button" onclick="check(this, 'verb', true);" class="btn btn-primary mb-2 mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> глаголы</button>
+			<button type="button" onclick="check(this, 'number', true);" class="btn btn-primary mb-2 mr-2"><span style="color:#ffffff;" class="fas fa-check"></span> числительные</button>
+		
+	</div>
 	<div class="row">
 		<div class="col-12 mt-4 mb-2 scrollable-table">
 			<table id="list" class="table table-striped table-bordered display nowrap" style="width:100%">
@@ -31,7 +37,7 @@
 				<tbody>
 				<?php
 					foreach($words as $item=>$value) {
-						echo '<tr><td style="width:20px;"><input oid="'.$value['id'].'" type="checkbox" '.$value['check'].' /></td>';
+						echo '<tr><td style="width:20px;"><input oid="'.$value['id'].'" part_of_speech="'.$value['part_of_speech'].'" type="checkbox" '.$value['check'].' /></td>';
 						echo '<td>'.$value['word'].'</td>';
 						echo '<td>'.$value['translation'].'</td></tr>';
 					}
