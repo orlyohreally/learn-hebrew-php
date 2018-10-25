@@ -21,6 +21,7 @@ $task = addslashes($_POST['task']);
 $answer = addslashes($_POST['answer']);
 $res = [];
 $res['status'] = 'error';
+$res['result'] = false;
 		
 if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice'))
 	$sql = 'select word, translation from word where word = lower("'.$word.'")';
@@ -30,30 +31,39 @@ else
 	$sql = 'select word, plural from word where word = lower("'.$word.'")';
 
 if($list = $conn->query($sql)) {
-	if($row = $list->fetch_assoc()) {
-		$res['status'] = 'success';		
+	$is_correct = false;
+	while($row = $list->fetch_assoc()) {
 		if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice')) {
 			$answered = $row['translation'] == mb_strtolower($answer);
-			$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
-			$list = $conn->query($sql);
-			$res['result'] = $row['translation'] == mb_strtolower($answer) ? 'correct' : 'wrong';
 			$res['correct'] = $row['translation'];
+			if($answered) {
+				$res['result'] = 'correct';
+				$is_correct = true;
+				break;
+			}
 		}
 		else if($lang == 'ru-he' && ($task == 'spelling' || $task == 'multichoice')){
-			$answered = $row['word'] == mb_strtolower($answer);
-			$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
-			$list = $conn->query($sql);
-			$res['result'] = $row['word'] == mb_strtolower($answer) ? 'correct' : 'wrong';
-			$res['correct'] = $row['word'];	
+			$answered = $row['word'] == $answer;
+			$res['correct'] = $row['word'];
+			if($answered) {
+				$res['result'] = 'correct';
+				$is_correct = true;
+				break;
+			}
 		}
-		else {
-			$answered = $row['plural'] == mb_strtolower($answer);
-			$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
-			$list = $conn->query($sql);
-			$res['result'] = $row['plural'] == mb_strtolower($answer) ? 'correct' : 'wrong';
+		else {//plural
+			$answered = $row['plural'] == $answer;
 			$res['correct'] = $row['plural'];
+			if($answered) {
+				$res['result'] = 'correct';
+				$is_correct = true;
+				break;
+			}
 		}
 	}
+	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
+	$list = $conn->query($sql);
+
 }
 echo json_encode($res);
 ?>
