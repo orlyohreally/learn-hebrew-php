@@ -39,6 +39,7 @@
 				else {
 					utils.showNotif($(".alert"), data.msg, 'danger', 600);
 				}
+				utils.deloader($("#update_list"));
 			},
 			error: function(data) {
 				console.log('error', data);
@@ -47,6 +48,7 @@
 	}
 	
 	$("#update_list").on('click', function(){
+		utils.loader($("#update_list"));
 		var list = [];
 		$("td input[oid]").each(function(i, el) {
 			if($(el).prop('checked'))
@@ -115,6 +117,7 @@
 		});
 	});
 	$("#start_training").on('click', function(){
+		utils.loader($("#start_training"));
 		var list = [];
 		$("td input[oid]").each(function(i, el) {
 			if($(el).prop('checked'))
@@ -125,12 +128,15 @@
 				title: "Выбор типа тренировки",
 				message: '<?php echo addslashes(str_replace(array("\n", "\r"), '', file_get_contents('module/training_options.php')));?>'
 			});
+			utils.deloader($("#start_training"));
 		}
 		else {
 			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов', 'danger', 1000);
+			utils.deloader($("#start_training"));
 		}
 	});
-	function start_training(task, lang) {console.log('clocked');
+	function start_training(obj, task, lang) {console.log('clocked');
+		utils.loader($(obj).children('.card-header'));
 		var list = [];
 		$("td input[oid]").each(function(i, el) {
 			if($(el).prop('checked'))
@@ -142,6 +148,7 @@
 			dataType: 'json',
 			url: '/ajax/start_training.php',
 			success: function(data) {
+				utils.deloader($(obj).children('.card-header'));
 				console.log('success', data);
 				if(data.status == 'success') {
 					window.location.href = '/training?task=' + task + '&lang=' + lang + '&code=' + data.code
@@ -151,7 +158,8 @@
 				}
 			},
 			error: function(data) {
-				console.log('error', data, $("#choose-option .alert"));
+				console.log('error', data);
+				utils.deloader($(obj).children('.card-header'));
 				utils.showNotif($("#choose-option.alert"), 'Ошибка!', 'danger', 600);
 			}
 		});
