@@ -32,7 +32,9 @@ else
 
 if($list = $conn->query($sql)) {
 	$is_correct = false;
+	$asked_word = '';
 	while($row = $list->fetch_assoc()) {
+		$asked_word = $row['word'];
 		if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice')) {
 			$answered = $row['translation'] == mb_strtolower($answer);
 			$res['correct'] = $row['translation'];
@@ -61,8 +63,15 @@ if($list = $conn->query($sql)) {
 			}
 		}
 	}
-	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$row['word'].'"';
-	$list = $conn->query($sql);
+	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$is_correct.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$asked_word.'"';
+
+	if($list = $conn->query($sql)) {
+		$res['status'] = 'success';
+	}
+	else {
+		$res['status'] = 'error';
+		$res['msg'] = $conn->error;
+	}
 
 }
 echo json_encode($res);
