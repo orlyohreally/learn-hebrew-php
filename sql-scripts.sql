@@ -16,10 +16,12 @@ create table word (
 	plural varchar(200),
 	plural_translation varchar(200),
 	part_of_speech varchar(50),
+	verb_id int null,
 	comment varchar(200) CHARACTER SET utf8 ,
 	exception_id int,
 	primary key (id),
-	foreign key exception_id references pl_exception(id)
+	foreign key (exception_id) references pl_exception(id),
+	foreign key (verb_id) references verb(id)
 );
 
 
@@ -60,6 +62,7 @@ insert into verb_form (form) values ('סוֹסֵס - סוֹסֶסֶת - סוֹסס�
 drop table verb;
 create table verb (
 	id int not null auto_increment,
+	infinitive varchar(200),
 	ms varchar(200) not  null,
 	fs varchar(200) not  null,
 	mp varchar(200) not  null,
@@ -140,3 +143,8 @@ create table rule_article (
 	content varchar(1000) CHARACTER SET utf8 not null,
 	primary key (id)
 );
+
+
+
+insert into word (word.word, word.translation, word.gender, word.plural, word.part_of_speech, word.verb_id)  
+select ms, translation, 'm', mp, 'verb', id from verb
