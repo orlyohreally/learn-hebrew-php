@@ -73,7 +73,6 @@ if($list = $conn->query($sql)) {
 			}	
 		}
 	}
-	$res['sql'] =  'update training t join word w on w.id = t.word_id set answered = '.(int)$is_correct.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$asked_word.'"';
 	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$is_correct.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$asked_word.'"';
 
 	if($list = $conn->query($sql)) {

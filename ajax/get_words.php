@@ -42,7 +42,7 @@ if($task == 'multichoice' || $task == 'spelling') {
 			}
 		}
 		else {
-			if($list = $conn->query('select w.id, word, comment, translation, tries, answered from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" order by answered, tries')) {
+			if($list = $conn->query('select w.id, word, comment, translation answer, tries, answered from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" order by answered, tries')) {
 				while($row = $list->fetch_assoc()) {
 					$results[] = $row;
 				}
@@ -52,8 +52,8 @@ if($task == 'multichoice' || $task == 'spelling') {
 		}
 	}
 }
-else {//plural
-	if($list = $conn->query('select w.id, word, plural, comment from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and part_of_speech = "noun" and plural is not null and plural != "" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit 1')) {
+else if($task == "plural"){//plural
+	if($list = $conn->query('select w.id, word, plural answer, comment from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and part_of_speech = "noun" and plural is not null and plural != "" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit 1')) {
 		if($row = $list->fetch_assoc()) {
 			$words[] = $row['word'];
 			$res['words'] = $words;
@@ -69,6 +69,25 @@ else {//plural
 			}
 		}
 	}
-}	
+}
+else if($task == "infinitive") {
+	if($list = $conn->query('select w.id, v.ms, v.fs, v.mp, v.fp from word w, training t, verb v where w.id = t.word_id and v.id = w.verb_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and part_of_speech = "verb" and v.infinitive is not null and v.infinitive != "" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit 1')) {
+		if($row = $list->fetch_assoc()) {
+			$form_i = random_int(0, 3);
+			$words[] = $row[array('ms', 'fs', 'mp', 'fp')[$form_i]];
+			$res['words'] = $words;
+			$res['status'] = 'success';
+		}
+		else {
+			if($list = $conn->query('select v.ms word, concat_ws(" ", v.infinitive, w.translation) as answer, tries, answered from word w, training t, verb v where w.id = t.word_id and part_of_speech = "verb" and w.verb_id = v.id and v.infinitive is not null and v.infinitive != "" and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" order by answered, tries')) {
+				while($row = $list->fetch_assoc()) {
+					$results[] = $row;
+				}
+				$res['results'] = $results;
+				$res['status'] = 'success';
+			}
+		}
+	}
+}
 echo json_encode($res);
 ?>
