@@ -1,10 +1,7 @@
 <?php
 require '../includes/check_role.php';
 require '../includes/connect.php';
-function update_training(&$conn, $answered, $word, $code) {
-	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$answered.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = "'.$code.'" and word = "'.$word.'"';
-	$list = $conn->query($sql);
-}
+
 if(!isset($_POST['lang']) || !isset($_POST['task']) || !isset($_POST['code'])){
 	echo '{"status": "error", "msg": "Не указаны обязательные данные"}';
 	die();
@@ -22,7 +19,6 @@ $answer = addslashes($_POST['answer']);
 $res = [];
 $res['status'] = 'error';
 $res['result'] = false;
-		
 if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice'))
 	$sql = 'select word, translation from word where word = lower("'.$word.'")';
 else if($lang == 'ru-he' && ($task == 'spelling' || $task == 'multichoice'))
@@ -46,7 +42,7 @@ if($list = $conn->query($sql)) {
 			}
 		}
 		else if($lang == 'ru-he' && ($task == 'spelling' || $task == 'multichoice')){
-			$answered = $row['word'] == $answer;
+			$answered = addslashes($row['word']) == $answer;
 			$res['correct'] = $row['word'];
 			if($answered) {
 				$res['result'] = 'correct';
@@ -55,7 +51,7 @@ if($list = $conn->query($sql)) {
 			}
 		}
 		else if($task == 'plural') {//plural
-			$answered = $row['plural'] == $answer;
+			$answered = addslashes($row['plural']) == $answer;
 			$res['correct'] = $row['plural'];
 			if($answered) {
 				$res['result'] = 'correct';
@@ -64,7 +60,7 @@ if($list = $conn->query($sql)) {
 			}
 		}
 		else if($task == 'infinitive') {
-			$answered = $row['infinitive'] == $answer;
+			$answered = addslashes($row['infinitive']) == $answer;
 			$res['correct'] = $row['infinitive'];
 			if($answered) {
 				$res['result'] = 'correct';

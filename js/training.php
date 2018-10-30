@@ -38,6 +38,7 @@
 				dataType: 'json',
 				url: 'ajax/check.php',
 				success: function(data) {
+					utils.deloader($("#answer"));
 					console.log('success', data);
 					if(data.result == 'correct') {
 						utils.showNotif($("#answer-area .alert"), 'Верно! Ответ - ' + data.correct, 'success');
@@ -85,12 +86,15 @@
 		$("#training .word").html(word);
 		$("#answer").off('click');
 		$("#answer").click(function(){
+			utils.loader($("#answer"));
 			checkTypeInAnswer(lang, task);
 		});
 		$("#typed_in_answer").focus();
 		$("#typed_in_answer").keyup(function(e){
-			if(e.keyCode == 13)
+			if(e.keyCode == 13) {
+				utils.loader($("#answer"));
 				checkTypeInAnswer(lang, task);
+			}
 		});
 	}
 	function start_training() {

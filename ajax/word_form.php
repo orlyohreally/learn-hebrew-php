@@ -8,7 +8,7 @@
 	}
 	else $id = 0;
 
-	if($res = $conn->query('select w.*, e.name exception from word w left join pl_exception e on e.id = w.exception_id where w.id = '.$id)) {
+	if($res = $conn->query('select w.*, e.name exception, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
 		if($row = $res->fetch_assoc()) {
 			$word = $row['word'];
 			$translation = $row['translation'];
@@ -19,6 +19,12 @@
 			$exception = $row['exception'];
 			$part_of_speech = $row['part_of_speech'];
 			$comment = $row['comment'];
+			$ms = $row['ms'];
+			$fs = $row['fs'];
+			$fp = $row['fp'];
+			$mp = $row['mp'];
+			$form_id = $row['form_id'];
+			$verb_id = $row['verb_id'];
 		}
 		else {
 			$word = '';
@@ -30,6 +36,12 @@
 			$exception = '';
 			$part_of_speech = '';
 			$comment = '';
+			$ms = '';
+			$fs = '';
+			$fp = '';
+			$mp = '';
+			$form_id = '';
+			$verb_id = '';
 		}
 	}
 
@@ -56,7 +68,7 @@
 					<form id="word_form">
 						<div class="form-group">
 							<label for="word_input">Слово</label>
-							<input type="text" required value = '<?php echo $word?>' class="form-control" id="word_input" aria-describedby="Слово" placeholder="Слово">
+							<input type="text" required value = "<?php echo $word?>" class="form-control" id="word_input" aria-describedby="Слово" placeholder="Слово">
 						</div>
 						<div class="row">
 							<div class="form-group col-12 col-md-8">
@@ -70,7 +82,8 @@
 									<option <?php if ($part_of_speech=='prep') echo 'selected'; ?> value="prep">Предлог</option>
 									<option <?php if ($part_of_speech=='question') echo 'selected'; ?> value="question">Вопрос</option>
 									<option <?php if ($part_of_speech=='phrase') echo 'selected'; ?> value="phrase">Фраза</option>
-									<option <?php if ($part_of_speech=='numeric') echo 'selected'; ?> value="numeric">Числительное</option>
+									<option <?php if ($part_of_speech=='number') echo 'selected'; ?> value="number">Числительное</option>
+									<option <?php if ($part_of_speech=='verb') echo 'selected'; ?> value="verb">Глагол</option>
 								</select>
 							</div>
 							<div class="form-group col-12 col-md-4">
@@ -83,12 +96,12 @@
 						</div>
 						<div class="form-group">
 							<label for="translation_input">Перевод</label>
-							<input type="text" required value = '<?php echo $translation;?>' class="form-control" id="translation_input" aria-describedby="Перевод" placeholder="Перевод">
+							<input type="text" required value = "<?php echo $translation;?>" class="form-control" id="translation_input" aria-describedby="Перевод" placeholder="Перевод">
 						</div>
 						<div class="row">
 							<div class="form-group col-12 col-md-7">
 								<label for="plural_input">Множественное число</label>
-								<input type="text" value = '<?php echo $plural;?>' class="form-control" id="plural_input" aria-describedby="Множественное число" placeholder="Множественное число">
+								<input type="text" value = "<?php echo $plural;?>" class="form-control" id="plural_input" aria-describedby="Множественное число" placeholder="Множественное число">
 							</div>
 							<div class="form-group col-12 col-md-5">
 								<label for="exception_id_input">Исключение</label>
@@ -109,7 +122,40 @@
 						</div>
 						<div class="form-group">
 							<label for="pl_translation_input">Перевод мн.ч.</label>
-							<input type="text" value = '<?php echo $plural_translation;?>' class="form-control" id="pl_translation_input" aria-describedby="Перевод мн.ч." placeholder="Перевод мн.ч.">
+							<input type="text" value = "<?php echo $plural_translation;?>" class="form-control" id="pl_translation_input" aria-describedby="Перевод мн.ч." placeholder="Перевод мн.ч.">
+						</div>
+						
+						<div class="form-group">
+							<label for="translation_input">Ед.ч. м.р.</label>
+							<input type="text" value = "<?php echo $ms;?>" class="form-control" id="ms_input" aria-describedby="Ед.ч. м.р." placeholder="Ед.ч. м.р.">
+						</div>
+						<div class="form-group">
+							<label for="translation_input">Ед.ч. ж.р.</label>
+							<input type="text" value = "<?php echo $fs;?>" class="form-control" id="fs_input" aria-describedby="Ед.ч. ж.р." placeholder="Ед.ч. ж.р.">
+						</div>
+						<div class="form-group">
+							<label for="translation_input">Мн.ч. м.р.</label>
+							<input type="text" value = "<?php echo $mp;?>" class="form-control" id="mp_input" aria-describedby="Мн.ч. м.р." placeholder="Мн.ч. м.р.">
+						</div>
+						<div class="form-group">
+							<label for="translation_input">Мн.ч. ж.р.</label>
+							<input type="text" value = "<?php echo $fp;?>" class="form-control" id="fp_input" aria-describedby="Мн.ч. ж.р." placeholder="Мн.ч. ж.р.">
+						</div>
+						<div class="form-group">
+							<label for="form_id_input">Форма</label>
+							<select id="form_id_input" aria-describedby="Форма" class="form-control">
+								<option value="">Нет</option>
+							<?php
+									if($res = $conn->query('select * from verb_form')) {
+										while($row = $res->fetch_assoc()) {
+											echo '<option ';
+											if ($form_id==$row['id'])
+												echo 'selected ';
+											echo 'value="'.$row['id'].'">'.$row['form'].'</option>';
+										}
+									}
+							?>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="comment_textarea">Примечание</label>
@@ -138,7 +184,7 @@
 											<strong>Слово:</strong>
 										</div>
 										<div class="col-9 text-right">
-											<span><?php echo $word.($gender!='' ? ($gender == 'm' ? ' (м.р.)' : ' (ж.р.)' ) : '');?></span>
+											<span><?php echo $word.($part_of_speech == 'noun' || $part_of_speech == 'number' ? ($gender!='' ? ($gender == 'm' ? ' (м.р.)' : ' (ж.р.)' ) : '') : '');?></span>
 										</div>
 									</div
 								</div>
@@ -167,6 +213,7 @@
 									</div
 								</div>
 							</li>
+							<?php if($part_of_speech == 'noun') { ?>
 							<li class="list-group-item">
 								<div class="col-12">
 									<div class="row">
@@ -179,7 +226,57 @@
 									</div
 								</div>
 							</li>
-							
+							<?php } ?>
+							<?php if($part_of_speech == 'verb') { ?>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Ед.ч. м.р.</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo $ms;?></span>
+										</div>
+									</div
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Ед.ч. ж.р.</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo $fs;?></span>
+										</div>
+									</div
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Мн.ч. м.р.</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo $mp;?></span>
+										</div>
+									</div
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Мн.ч. ж.р.</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo $fp;?></span>
+										</div>
+									</div
+								</div>
+							</li>
+							<?php } ?>
 						</ul>
 					</div>
 					
