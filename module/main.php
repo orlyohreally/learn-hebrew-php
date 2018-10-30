@@ -8,13 +8,32 @@
 		<ol class="carousel-indicators">
 			<li data-target="#slider" data-slide-to="1" class="active"></li>
 			<li data-target="#slider" data-slide-to="2"></li>
+			<li data-target="#slider" data-slide-to="3"></li>
+			<li data-target="#slider" data-slide-to="4"></li>
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active" style = "height: 400px;">
 				<div class = "slider-img" style = "background: black url('img/slide-4.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
 				<div class="carousel-caption d-md-block">
-					<h3>Списки слов для тренировки</h3>
-					<p>Создавайте и сохраняйте свои списки слов для тренировок</p>
+					<h3>Личные тренировки</h3>
+					<p>Создавайте свои списки слов для тренировок: перевод ru-he, he-ru, выбор ответа из списка или ввод ответа с клавиатуры</p>
+					<a class="btn btn-lg btn-primary" href = "/my-lists" >Перейти</a>
+				</div>
+				
+			</div>
+			<div class="carousel-item" style = "height: 400px;">
+				<div class = "slider-img" style = "background: black url('img/slide-5.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
+				<div class="carousel-caption d-md-block">
+					<h3>Тренировка инфинитивов</h3>
+					<p>Выбирайте глаголы для тренировки и определяйте инфинитивы глаголов в любом числе и роде</p>
+					<a class="btn btn-lg btn-primary" href = "/my-lists" >Перейти</a>
+				</div>
+			</div>
+			<div class="carousel-item" style = "height: 400px;">
+				<div class = "slider-img" style = "background: black url('img/slide-1.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
+				<div class="carousel-caption d-md-block">
+					<h3>Тренировка сущ. во мн. ч.</h3>
+					<p>Выбирайте существительные для тренировки и ставьте их во множественнное число</p>
 					<a class="btn btn-lg btn-primary" href = "/my-lists" >Перейти</a>
 				</div>
 			</div>
@@ -22,7 +41,7 @@
 				<div class = "slider-img" style = "background: black url('img/slide-3.jpg') center top no-repeat; background-size: cover; width: 100%;"></div>
 				<div class="carousel-caption d-md-block">
 					<h3>Авторизация</h3>
-					<p>Регистрируйтесь, чтобы создавать свои списки слов</p>
+					<p>Регистрируйтесь, чтобы создавать личные списки слов</p>
 					<a class="btn btn-lg btn-primary" href = "/login" >Авторизоваться</a>
 				</div>
 			</div>

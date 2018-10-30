@@ -47,6 +47,10 @@ button:hover {
 .carousel-caption h3 {
 	color: #ffffff;
 }
+.carousel-caption p {
+	background: rgb(0, 0, 0, 0.5);
+	padding: 10px;
+}
 /*.carousel-indicators li {
 	background-color: rgba(0, 0, 0, 0.5);
 }
