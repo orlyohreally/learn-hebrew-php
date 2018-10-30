@@ -27,14 +27,15 @@ if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice'))
 	$sql = 'select word, translation from word where word = lower("'.$word.'")';
 else if($lang == 'ru-he' && ($task == 'spelling' || $task == 'multichoice'))
 	$sql = 'select word, translation from word where translation = lower("'.$word.'")';
-else
+else if($lang == 'he-he' && $task == 'plural')
 	$sql = 'select word, plural from word where word = lower("'.$word.'")';
-
+else if($lang == 'he-he' && $task == 'infinitive')
+	$sql = 'select ms, infinitive from verb where ms = "'.$word.'" or fs = "'.$word.'" or mp = "'.$word.'" or fp = "'.$word.'"';
 if($list = $conn->query($sql)) {
 	$is_correct = false;
 	$asked_word = '';
 	while($row = $list->fetch_assoc()) {
-		$asked_word = $row['word'];
+		$asked_word = (isset($row['word']) ? $row['word'] : $row['ms']);
 		if($lang == 'he-ru' && ($task == 'spelling' || $task == 'multichoice')) {
 			$answered = $row['translation'] == mb_strtolower($answer);
 			$res['correct'] = $row['translation'];
@@ -53,7 +54,7 @@ if($list = $conn->query($sql)) {
 				break;
 			}
 		}
-		else {//plural
+		else if($task == 'plural') {//plural
 			$answered = $row['plural'] == $answer;
 			$res['correct'] = $row['plural'];
 			if($answered) {
@@ -62,7 +63,17 @@ if($list = $conn->query($sql)) {
 				break;
 			}
 		}
+		else if($task == 'infinitive') {
+			$answered = $row['infinitive'] == $answer;
+			$res['correct'] = $row['infinitive'];
+			if($answered) {
+				$res['result'] = 'correct';
+				$is_correct = true;
+				break;
+			}	
+		}
 	}
+	$res['sql'] =  'update training t join word w on w.id = t.word_id set answered = '.(int)$is_correct.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$asked_word.'"';
 	$sql = 'update training t join word w on w.id = t.word_id set answered = '.(int)$is_correct.', tries = tries + 1 where webuser_id = '.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and code = '.$code.' and word = "'.$asked_word.'"';
 
 	if($list = $conn->query($sql)) {

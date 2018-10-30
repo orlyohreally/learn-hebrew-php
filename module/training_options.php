@@ -28,4 +28,10 @@
     <p class="card-text">Определение мн.ч. существительного</p>
   </div>
 </div>
+<div onclick="start_training(this, 'infinitive', 'he-he')" class="card trainig-option text-white bg-success mb-3">
+  <div class="card-header bg-success">Определение инфинитива</div>
+  <div class="card-body p-2">
+    <p class="card-text">Определение инфинитива глаголы</p>
+  </div>
+</div>
 <div id="choose-option" class="alert alert-dismissible fade show" role="alert"></div>
