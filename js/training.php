@@ -109,6 +109,8 @@
 			url: 'ajax/get_words.php',
 			success: function(data) {
 				console.log('success', data);
+				$('.progress-bar').css({'width': (data.answered / data.total * 100) + '%'});
+				$('.progress-bar').html(data.answered + '/' + data.total);
 				if(data.words.length) {
 					if(task == 'multichoice')
 						multichoice(task, lang, data.words);
