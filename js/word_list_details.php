@@ -135,8 +135,10 @@
 			utils.deloader($("#start_training"));
 		}
 	});
-	function start_training(obj, task, lang) {console.log('clocked');
+	function start_training(obj, task, lang) {
 		utils.loader($(obj).children('.card-header'));
+		const all_words = $("input#all_words").prop('checked');
+		console.log(all_words);
 		var list = [];
 		$("td input[oid]").each(function(i, el) {
 			if($(el).prop('checked'))
@@ -151,7 +153,7 @@
 				utils.deloader($(obj).children('.card-header'));
 				console.log('success', data);
 				if(data.status == 'success') {
-					window.location.href = '/training?task=' + task + '&lang=' + lang + '&code=' + data.code
+					window.location.href = '/training?task=' + task + '&lang=' + lang + '&code=' + data.code + '&all_words=' + all_words
 				}
 				else {
 					utils.showNotif($("#choose-option.alert"), data.msg, 'danger', 600);

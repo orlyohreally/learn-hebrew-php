@@ -101,10 +101,11 @@
 		const task = "<?php echo $_GET['task']?>";
 		const lang = "<?php echo $_GET['lang']?>";
 		const code = "<?php echo $_GET['code']?>";
+		const all_words = "<?php echo $_GET['all_words']?>";
 		utils.loader($(".word"));
 		$.ajax({
 			method: 'GET',
-			data: 'task='+task + '&lang=' + lang + '&code=' + code,
+			data: 'task='+task + '&lang=' + lang + '&code=' + code + '&all_words=' + all_words,
 			dataType: 'json',
 			url: 'ajax/get_words.php',
 			success: function(data) {

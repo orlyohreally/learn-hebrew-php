@@ -9,6 +9,7 @@ $task = addslashes($_GET['task']);
 $lang = addslashes($_GET['lang']);
 $code = addslashes($_GET['code']);
 $word_count = $task == 'multichoice' ? 4 : ($task == 'spelling' ? 1 : 0);
+$all_words = $_GET['all_words'] == 'true' ? true : false;
 $words = [];
 $q = [];
 $res = [];
@@ -27,7 +28,8 @@ if($task == 'multichoice' || $task == 'spelling') {
 		if($row = $list->fetch_assoc()) {
 			$q = $row;
 			if($word_count > 1) {
-				if($list = $conn->query('select id, word, comment, translation from word where id != '.$q['id'].' order by rand() limit '.($word_count - 1))) {
+				$sql = $all_words ? 'select id, word, comment, translation from word where id != '.$q['id'].' order by rand() limit '.($word_count - 1) : 'select w.id, word, comment, translation from word w, training t where w.id = t.word_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').' and w.id != '.$q['id'].' and code = "'.$code.'" order by rand() limit '.($word_count - 1);
+				if($list = $conn->query($sql)) {
 					$i = random_int(1, $word_count);
 					while($row = $list->fetch_assoc()) {
 						if(sizeof($words) + 1 == $i){
