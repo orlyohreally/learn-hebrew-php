@@ -91,10 +91,9 @@
 			}
 		});
 	}
-	
+	<?php if(isset($_SESSION['user_id'])) { ?>
 	$(".list-name").on('click', function(){
 		const old_name = $(this).html();
-		console.log(old_name);
 		const dialog = bootbox.dialog({
 			title: "Обновить название списка слов",
 			message: '<div class="form-group"><label for="name_input">Новое название списка</label><input type="text" required value = "'+ old_name + '" class="form-control" id="name_input" aria-describedby="Название списка" placeholder="Название списка"></div><div id="update-name" class="alert alert-dismissible fade show" role="alert"></div>',
@@ -116,6 +115,7 @@
 			}
 		});
 	});
+	<?php }?>
 	$("#start_training").on('click', function(){
 		utils.loader($("#start_training"));
 		var list = [];
