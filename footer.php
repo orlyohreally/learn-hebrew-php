@@ -28,6 +28,9 @@
 				case 'training':
 					require 'js/training.php';
 					break;
+				case 'tests':
+					require 'js/tests_scripts.php';
+					break;
 				case 'word_list_details':
 					require 'js/word_list_details.php';
 					break;

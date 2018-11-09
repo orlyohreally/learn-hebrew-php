@@ -6,6 +6,13 @@
 	<div class="collapse navbar-collapse " id="navbarCollapse">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item"><a class = "nav-link" href="/words">Список слов</a></li>
+			<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Тесты
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="/tests?test=sv">сущ + гл</a>
+		    </li>
 			<li class="nav-item"><a class = "nav-link" href="/my-lists">Мои списки слов</a></li>
 			<?php
 				if(!isset($_SESSION['user_id'])) {//неавторизован

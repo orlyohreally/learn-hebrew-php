@@ -90,6 +90,10 @@
 			include 'header.php';
 			include 'module/training.php';
 			break;
+		case 'tests':
+			include 'header.php';
+			include 'module/tests.php';
+			break;
 		default: {
 			include 'header.php';
 			include '404.php';

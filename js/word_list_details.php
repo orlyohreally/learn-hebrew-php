@@ -1,7 +1,7 @@
 <script>
-	function check(element, part_of_speech, check) {
-		$("input[type='checkbox'][part_of_speech='" + part_of_speech + "']").prop('checked', check);
-		$(element).attr('onclick', "check(this, '" + part_of_speech + "', "+ (!check) + ")");
+	function check(element, attr, name, check) {
+		$("input[type='checkbox'][" + attr + "='" + name + "']").prop('checked', check);
+		$(element).attr('onclick', "check(this, '" + attr + "', '" + name + "', "+ (!check) + ")");
 		$(element).children('span').removeClass(check ? 'fa-check' : 'fa-times').addClass(check ? 'fa-times' : 'fa-check');
 	}
 
