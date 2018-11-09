@@ -35,8 +35,9 @@
 			?>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-12 mt-4 mb-2 scrollable-table">
+	<div class="row mt-4 mb-2">
+		<div class="col-12 mb-2 selected-counter"></div>
+		<div class="col-12 scrollable-table">
 			<table id="list" class="table table-striped table-bordered display nowrap" style="width:100%">
 				<thead>
 					<tr>
@@ -56,6 +57,7 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="col-12 mt-2 selected-counter"></div>
 	</div>
 	<div class="row">
 		<div class="col-12 text-center">

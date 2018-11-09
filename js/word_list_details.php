@@ -1,8 +1,18 @@
 <script>
+	function count_selected() {
+		$("div.selected-counter").html('Слов выбрано: ' + $("input[oid]:checked").length);
+	}
+	$(document).ready(function(){
+		count_selected();
+	});
+	$("input").on('change', function() {
+		count_selected();
+	});
 	function check(element, attr, name, check) {
 		$("input[type='checkbox'][" + attr + "='" + name + "']").prop('checked', check);
 		$(element).attr('onclick', "check(this, '" + attr + "', '" + name + "', "+ (!check) + ")");
 		$(element).children('span').removeClass(check ? 'fa-check' : 'fa-times').addClass(check ? 'fa-times' : 'fa-check');
+		count_selected();
 	}
 
 	function reset_list(list, list_id) {
