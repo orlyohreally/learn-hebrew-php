@@ -14,7 +14,7 @@ $words = json_decode($_POST['words']);
 	$added = 0;
 	$code = randomString(5);
 	foreach($words as $item=>$value) {
-		if($list = $conn->query('insert into training (webuser_id, word_id, code) values ('.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '1').', '.$value.', "'.$code.'")')) {
+		if($list = $conn->query('insert into training (webuser_id, word_id, code) values ('.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '2').', '.$value.', "'.$code.'")')) {
 			$added = $added + 1;
 		}
 	}

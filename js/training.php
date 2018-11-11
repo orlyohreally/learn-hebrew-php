@@ -33,29 +33,29 @@
 	}
 	function checkTypeInAnswer(lang, task) {
 		$.ajax({
-				method: 'POST',
-				data: 'task='+task+'&lang='+lang+'&word='+$("#training .word").html() +'&answer='+$("#typed_in_answer").val() + '&code="<?php echo $_GET['code']?>"',
-				dataType: 'json',
-				url: 'ajax/check.php',
-				success: function(data) {
-					utils.deloader($("#answer"));
-					console.log('success', data);
-					if(data.result == 'correct') {
-						utils.showNotif($("#answer-area .alert"), 'Верно! Ответ - ' + data.correct, 'success');
-					}
-					else {
-						utils.showNotif($("#answer-area .alert"), 'Не верно! Ответ - ' + data.correct, 'danger', 750);
-					}
-					setTimeout(function(){
-						start_training();
-					}, 800);
-				},
-				error: function(data) {
-					console.log('error', data);
-					utils.deloader($("#answer"));
-					utils.showNotif($("#answer-area .alert"), 'Ошибка!', 'danger');
+			method: 'POST',
+			data: 'task='+task+'&lang='+lang+'&word='+$("#training .word").html() +'&answer='+$("#typed_in_answer").val() + '&code="<?php echo $_GET['code']?>"',
+			dataType: 'json',
+			url: 'ajax/check.php',
+			success: function(data) {
+				utils.deloader($("#answer"));
+				console.log('success', data);
+				if(data.result == 'correct') {
+					utils.showNotif($("#answer-area .alert"), 'Верно! Ответ - ' + data.correct, 'success');
 				}
-			});
+				else {
+					utils.showNotif($("#answer-area .alert"), 'Не верно! Ответ - ' + data.correct, 'danger', 750);
+				}
+				setTimeout(function(){
+					start_training();
+				}, 800);
+			},
+			error: function(data) {
+				console.log('error', data);
+				utils.deloader($("#answer"));
+				utils.showNotif($("#answer-area .alert"), 'Ошибка!', 'danger');
+			}
+		});
 	}
 	
 	function multichoice(task, lang, list) {
@@ -97,6 +97,27 @@
 			}
 		});
 	}
+	function upgrade_training(task, lang, code, all_words) {
+		$.ajax({
+			method: 'POST',
+			data: 'task=' + task + '&lang=' + lang + '&code=' + code + '&all_words=' + all_words,
+			dataType: 'json',
+			url: 'ajax/upgrade_training.php',
+			success: function(data) {
+				console.log(data);
+				if(data.status == 'success') {
+					window.location.href = "/training?task=" + task + "&lang=" + lang + "&code="+ data.new_code + "&all_words=" + all_words;
+				}
+				else {
+					utils.showNotif($("#results_alert.alert"), data.msg, 'danger', 0);
+				}
+			},
+			error: function(data) {
+				console.log('error', data);
+				utils.showNotif($("#results_alert.alert"), 'Ошибка!', 'danger');
+			}
+		});
+	}
 	function start_training() {
 		const task = "<?php echo $_GET['task']?>";
 		const lang = "<?php echo $_GET['lang']?>";
@@ -105,7 +126,7 @@
 		utils.loader($(".word"));
 		$.ajax({
 			method: 'GET',
-			data: 'task='+task + '&lang=' + lang + '&code=' + code + '&all_words=' + all_words,
+			data: 'task=' + task + '&lang=' + lang + '&code=' + code + '&all_words=' + all_words,
 			dataType: 'json',
 			url: 'ajax/get_words.php',
 			success: function(data) {
@@ -119,25 +140,38 @@
 						spelling(task, lang, data.words[0])
 				}
 				else {
-					var results_html = '<div class="card"><ul class="list-group list-group-flush">';
+					var results_html = '<div class="card mb-2"><ul class="list-group list-group-flush">';
+					var count = 0; //counting words to study: tries > 1 or answered = 0
 					for(var i = 0; i < data.results.length; i++) {
+						if(data.results[i]['tries'] > 1 || !data.results[i]['answered'])
+							count++;
 						results_html += '<li class="list-group-item"><div class="col-12"><div class="row"><div class="col-8"><strong>' + data.results[i]['word'] + ' - ' + data.results[i]['answer'] + '</strong></div><div class="col-4 text-right"><i class="fas ' + (data.results[i]['answered'] > 0 ? 'fa-check' : 'fa-times') + '"></i><span> ' + data.results[i]['tries'] + ' попыток</span></div></div></div></li>';
 					}
-					results_html += '</ul></div>';
+					results_html += '</ul></div><div id = "results_alert" class="alert alert-dismissible fade show" role="alert"></div>';
+					var buttons = {};
+					buttons['ok'] = {
+						label: 'Ок',
+						className: 'btn-primary',
+						callback: function() {
+							window.location.href = "/my-lists";
+							return true;
+						}
+					}
+					if(count && (count > 4 || (all_words == 'true'))) {
+						buttons['try_again'] = {
+							label: 'Тренировать проблемные слова',
+							className: 'btn-info',
+							callback: function() {
+								upgrade_training(task, lang, code, all_words);
+								return false;
+							}
+						};
+					}
 					const dialog = bootbox.dialog({
 						title: "Тренировка закончена",
 						message: results_html,
 						backdrop: true,
-						buttons: {
-							ok: {
-								label: 'Ок',
-								className: 'btn-primary',
-								callback: function() {
-									window.location.href = "/my-lists";
-									return true;
-								}
-							}
-						},
+						buttons: buttons,
 						closeButton: false
 					});
 					$().on('hide.bs.modal', function(){
