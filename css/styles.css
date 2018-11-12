@@ -125,3 +125,24 @@ button:hover {
 .trainig-option{
 	cursor: pointer;
 }
+
+
+
+.scroller {
+	position: fixed;
+	bottom: 30px;
+	right: 10px;
+}
+.scroller .scroller-up {
+	right: 50px;
+	cursor: pointer;
+	display: none;
+	font-size: 200%;
+	
+}
+.scroller .scroller-down {
+	right: 10px;
+	cursor: pointer;
+	font-size: 200%;
+	
+}

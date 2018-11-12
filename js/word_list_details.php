@@ -4,6 +4,8 @@
 	}
 	$(document).ready(function(){
 		count_selected();
+		utils.scrollerUp($('.scroller-up'));
+		utils.scrollerDown($('.scroller-down'));
 	});
 	$("input").on('change', function() {
 		count_selected();
