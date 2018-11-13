@@ -8,7 +8,7 @@
 	}
 	else $id = 0;
 
-	if($res = $conn->query('select w.*, e.name exception, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
+	if($res = $conn->query('select w.*, e.name exception, v.infinitive, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
 		if($row = $res->fetch_assoc()) {
 			$word = $row['word'];
 			$translation = $row['translation'];
@@ -25,6 +25,7 @@
 			$mp = $row['mp'];
 			$form_id = $row['form_id'];
 			$verb_id = $row['verb_id'];
+			$infinitive = $row['infinitive'];
 		}
 		else {
 			$word = '';
@@ -42,6 +43,7 @@
 			$mp = '';
 			$form_id = '';
 			$verb_id = '';
+			$infinitive = '';
 		}
 	}
 
@@ -76,6 +78,7 @@
 								<select rows="2" id="partofspeech_input" aria-describedby="Часть речи" class="form-control">
 									<option <?php if ($part_of_speech=='noun') echo 'selected'; ?> value="noun">Существительное</option>
 									<option <?php if ($part_of_speech=='adj') echo 'selected'; ?> value="adj">Прилагательное</option>
+									<option <?php if ($part_of_speech=='verb') echo 'selected'; ?> value="verb">Глагол</option>
 									<option <?php if ($part_of_speech=='adverb') echo 'selected'; ?> value="adverb">Наречие</option>
 									<option <?php if ($part_of_speech=='pronoun') echo 'selected'; ?> value="pronoun">Местоимение</option>
 									<option <?php if ($part_of_speech=='conj') echo 'selected'; ?> value="conj">Союз</option>
@@ -83,7 +86,6 @@
 									<option <?php if ($part_of_speech=='question') echo 'selected'; ?> value="question">Вопрос</option>
 									<option <?php if ($part_of_speech=='phrase') echo 'selected'; ?> value="phrase">Фраза</option>
 									<option <?php if ($part_of_speech=='number') echo 'selected'; ?> value="number">Числительное</option>
-									<option <?php if ($part_of_speech=='verb') echo 'selected'; ?> value="verb">Глагол</option>
 								</select>
 							</div>
 							<div class="form-group col-12 col-md-4">
@@ -124,7 +126,10 @@
 							<label for="pl_translation_input">Перевод мн.ч.</label>
 							<input type="text" value = "<?php echo $plural_translation;?>" class="form-control" id="pl_translation_input" aria-describedby="Перевод мн.ч." placeholder="Перевод мн.ч.">
 						</div>
-						
+						<div class="form-group">
+							<label for="infinitive_input">Инфинитив</label>
+							<input type="text" value = "<?php echo $infinitive;?>" class="form-control" id="infinitive_input" aria-describedby="Инфинитив" placeholder="Инфинитив">
+						</div>
 						<div class="form-group">
 							<label for="translation_input">Ед.ч. м.р.</label>
 							<input type="text" value = "<?php echo $ms;?>" class="form-control" id="ms_input" aria-describedby="Ед.ч. м.р." placeholder="Ед.ч. м.р.">
@@ -228,6 +233,18 @@
 							</li>
 							<?php } ?>
 							<?php if($part_of_speech == 'verb') { ?>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Инфинитив</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo $infinitive;?></span>
+										</div>
+									</div
+								</div>
+							</li>
 							<li class="list-group-item">
 								<div class="col-12">
 									<div class="row">
