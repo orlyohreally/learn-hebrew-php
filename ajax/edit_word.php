@@ -72,6 +72,10 @@ if(isset($_POST['exception_id']))
 	$exception_id = (int)$_POST['exception_id'];
 else
 	$exception_id = 0;
+if(isset($_POST['topic_id']))
+	$topic_id = (int)$_POST['topic_id'];
+else
+	$topic_id = 0;
 if($partofspeech == 'verb') {//it's a verb
 	if($id == 0 || !isset($verb_id)) {//new word or changed to verb
 		$sql = 'insert into verb (ms, fs, mp, fp, translation, form_id, infinitive) values ('.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', "'.$translation.'", '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').')';
@@ -93,7 +97,7 @@ if($partofspeech == 'verb') {//it's a verb
 	}
 }
 if($id == 0) {
-	if($list = $conn->query('insert into word (word, translation, gender, plural, plural_translation, exception_id, part_of_speech, comment, verb_id) values (lower("'.$word.'"), lower("'.$translation.'"), "'.$gender.'", lower("'.$plural.'"), lower("'.$pl_translation.'"), '. ($exception_id > 0 ? $exception_id : 'null').', "'.$partofspeech.'"'.', "'.$comment.'", '.(isset($verb_id) ? $verb_id : 'null').')')) {
+	if($list = $conn->query('insert into word (word, translation, gender, plural, plural_translation, exception_id, part_of_speech, comment, verb_id, topic_id) values (lower("'.$word.'"), lower("'.$translation.'"), "'.$gender.'", lower("'.$plural.'"), lower("'.$pl_translation.'"), '. ($exception_id > 0 ? $exception_id : 'null').', "'.$partofspeech.'"'.', "'.$comment.'", '.(isset($verb_id) ? $verb_id : 'null').', '.($topic_id > 0 ? $topic_id : 'null').')')) {
 		$res['status'] = 'success';
 		$res['msg'] = 'Слово успешно добавлено';
 	}
@@ -104,7 +108,7 @@ else {
 	if($partofspeech == 'verb') {
 		$verb_id_new = $verb_id;
 	}
-	if($list = $conn->query('update word set word = lower("'.$word.'"), translation = lower("'.$translation.'"), gender = "'.$gender.'", plural = lower("'.$plural.'"), verb_id='.(isset($verb_id_new) ? $verb_id_new : 'null').', comment = "'.$comment.'", part_of_speech = "'.$partofspeech.'", plural_translation = lower("'.$pl_translation.'"), exception_id = '.($exception_id > 0 ? $exception_id : 'null').' where id = '.$id)) {
+	if($list = $conn->query('update word set word = lower("'.$word.'"), translation = lower("'.$translation.'"), gender = "'.$gender.'", plural = lower("'.$plural.'"), verb_id='.(isset($verb_id_new) ? $verb_id_new : 'null').', comment = "'.$comment.'", part_of_speech = "'.$partofspeech.'", plural_translation = lower("'.$pl_translation.'"), exception_id = '.($exception_id > 0 ? $exception_id : 'null').', topic_id = '.($topic_id > 0 ? $topic_id : 'null').' where id = '.$id)) {
 		if($partofspeech != 'verb' && isset($verb_id)) {//word was a verb and now it's not
 			$sql = 'delete from verb where id = '.$verb_id;
 			if($list = $conn->query($sql)) {

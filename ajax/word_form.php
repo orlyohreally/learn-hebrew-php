@@ -8,7 +8,7 @@
 	}
 	else $id = 0;
 
-	if($res = $conn->query('select w.*, e.name exception, v.infinitive, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
+	if($res = $conn->query('select w.*, topic_id, e.name exception, v.infinitive, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
 		if($row = $res->fetch_assoc()) {
 			$word = $row['word'];
 			$translation = $row['translation'];
@@ -26,6 +26,7 @@
 			$form_id = $row['form_id'];
 			$verb_id = $row['verb_id'];
 			$infinitive = $row['infinitive'];
+			$topic_id = $row['topic_id'];
 		}
 		else {
 			$word = '';
@@ -44,6 +45,7 @@
 			$form_id = '';
 			$verb_id = '';
 			$infinitive = '';
+			$topic_id = '';
 		}
 	}
 
@@ -157,6 +159,22 @@
 											if ($form_id==$row['id'])
 												echo 'selected ';
 											echo 'value="'.$row['id'].'">'.$row['form'].'</option>';
+										}
+									}
+							?>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="topic_id_input">Тема</label>
+							<select id="topic_id_input" aria-describedby="Тема" class="form-control">
+								<option value="">Нет</option>
+							<?php
+									if($res = $conn->query('select id, name from topic')) {
+										while($row = $res->fetch_assoc()) {
+											echo '<option ';
+											if ($topic_id==$row['id'])
+												echo 'selected ';
+											echo 'value="'.$row['id'].'">'.$row['name'].'</option>';
 										}
 									}
 							?>
