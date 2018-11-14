@@ -65,7 +65,8 @@
 								echo '<div class="container mb-5 mt-5" id="lists">
 										<div class="row">
 											<div class="col-12">
-												<h1 class="text-center">Списки слов</h1>
+												<h1 class="text-center">Списки слов | רשימות מילים
+מילים</h1>
 											</div>
 										</div>
 										<div class="row">';
@@ -84,7 +85,7 @@
 											if(isset($row['description']))
 												echo '<p class="card-text p-3">'. $row['description'].'</p>';
 										?>
-										<a href="<?php echo $row['url']; ?>" class="btn btn-primary">Смотреть</a>
+										<a href="<?php echo $row['url']; ?>" class="btn btn-primary">Смотреть | תראה</a>
 									</div>
 								</div>
 							</div>
@@ -106,7 +107,7 @@
 								echo '<div class="container mb-5 mt-5" id="lists">
 										<div class="row">
 											<div class="col-12">
-												<h1 class="text-center">Правила</h1>
+												<h1 class="text-center">Правила | כללים</h1>
 											</div>
 										</div><div class="row">';
 								$first = false;
@@ -124,7 +125,7 @@
 											if(isset($row['description']))
 												echo '<p class="card-text p-3">'. $row['description'].'</p>';
 										?>
-										<a href="<?php echo 'rule/'.$row['slug']; ?>" class="btn btn-primary">Читать</a>
+										<a href="<?php echo 'rule/'.$row['slug']; ?>" class="btn btn-primary">Читать | לקרוא</a>
 									</div>
 								</div>
 							</div>

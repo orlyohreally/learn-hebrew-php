@@ -3,12 +3,12 @@
 	include 'menu.php';
 ?>
 <div class="container mt-5 mb-5">
-	<h1>Слова</h1>
+	<h1>Слова | מילים</h1>
 	<div class="row">
 		<?php
 			if($user_role == 'admin') {?>
 				<div class="col-12 text-right">
-					<button type="button" id="create_word" class="btn btn-primary">Добавить новое слово</button>
+					<button type="button" id="create_word" class="btn btn-primary">Добавить новое слово<hr>הוסף מילה חדשה</button>
 				</div>
 			<?php }
 		?>
@@ -17,9 +17,9 @@
 			<table id="list" class="table table-striped table-bordered display nowrap" style="width:100%">
 				<thead>
 					<tr>
-						<th>Перевод</th>
-						<th>Слово</th>
-						<th>Мн.ч.</th>
+						<th>Перевод | תרגום</th>
+						<th>Слово | מילה</th>
+						<th>Мн.ч. | רבים</th>
 					</tr>
 				</thead>
 				<tbody>

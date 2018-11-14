@@ -20,10 +20,10 @@
 	<?php }?>
 	<div class="col-12">
 		<div class="row mt-3">
-				<button type="button" onclick="check(this, 'part_of_speech', 'noun', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> сущ.</button>
-				<button type="button" onclick="check(this, 'part_of_speech', 'verb', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> глаголы</button>
-				<button type="button" onclick="check(this, 'part_of_speech', 'adj', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> прилаг.</button>
-				<button type="button" onclick="check(this, 'part_of_speech', 'number', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> числительные</button>
+				<button type="button" onclick="check(this, 'part_of_speech', 'noun', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> сущ. | שם עצם</button>
+				<button type="button" onclick="check(this, 'part_of_speech', 'verb', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> глаголы | פועל</button>
+				<button type="button" onclick="check(this, 'part_of_speech', 'adj', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> прилаг. | שם תואר</button>
+				<button type="button" onclick="check(this, 'part_of_speech', 'number', true);" class="btn btn-primary m-1"><span style="color:#ffffff;" class="fas fa-check"></span> числительные | מספר</button>
 			<?php
 				if($list = $conn->query('select name, slug from topic order by name, slug')) {
 					while($row = $list->fetch_assoc()) {
@@ -42,8 +42,8 @@
 				<thead>
 					<tr>
 						<th style="width:20px;"><input type="checkbox" class="select-all"/></th>
-						<th>Слово</th>
-						<th>Перевод</th>
+						<th>Слово | מילה</th>
+						<th>Перевод | תרגום</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,7 +63,7 @@
 		<div class="col-12 text-center">
 			<div class="alert alert-dismissible fade show" role="alert"></div>
 			<?php if(isset($_SESSION['user_id'])) echo '<button type="button" id="update_list" class="btn btn-primary mb-2">Обновить список</button>';?>
-			<button type="button" id="start_training" class="btn btn-primary mb-2">Начать тренировку</button>
+			<button type="button" id="start_training" class="btn btn-primary mb-2">Начать тренировку<hr>תתחיל להתאמן</button>
 		</div>
 	</div>
 	<div class="scroller"><span class="fa fa-arrow-up scroller-up"></span>

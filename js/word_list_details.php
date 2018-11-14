@@ -1,6 +1,6 @@
 <script>
 	function count_selected() {
-		$("div.selected-counter").html('Слов выбрано: ' + $("input[oid]:checked").length);
+		$("div.selected-counter").html('מילים נבחרות | Слов выбрано: ' + $("input[oid]:checked").length);
 	}
 	$(document).ready(function(){
 		count_selected();
@@ -70,7 +70,7 @@
 			reset_list(list, <?php echo $list_id?>);
 		}
 		else {
-			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов', 'danger', 1000);
+			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
 		}
 	});
 	$("input.select-all").on('change', function() {//select or unselect al words
@@ -148,7 +148,7 @@
 			utils.deloader($("#start_training"));
 		}
 		else {
-			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов', 'danger', 1000);
+			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
 			utils.deloader($("#start_training"));
 		}
 	});
