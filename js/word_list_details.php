@@ -73,15 +73,19 @@
 			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов', 'danger', 1000);
 		}
 	});
-	$("input.select-all").on('change', function() {
+	$("input.select-all").on('change', function() {//select or unselect al words
 		if($(this).prop('checked')) {
 			$("td input[oid]").prop('checked', true);
 		}
 		else {
 			$("td input[oid]").prop('checked', false);
 		}
+		count_selected();
 	});
-	
+	$("#list td").click(function(){
+		const el = $(this).parent().find("input[type=checkbox]");
+		$(el).prop('checked', !$(el).prop('checked'));
+	});
 	function update_list(old_name, name) {console.log(old_name, name);
 		$.ajax({
 			method: 'POST',

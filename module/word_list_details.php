@@ -66,8 +66,6 @@
 			<button type="button" id="start_training" class="btn btn-primary mb-2">Начать тренировку</button>
 		</div>
 	</div>
-	<!--<div class="scroller-up scroller"><span class="fa fa-arrow-up"></span></div>
-	<div class="scroller-down scroller"><span class="fa fa-arrow-down"></span></div>-->
 	<div class="scroller"><span class="fa fa-arrow-up scroller-up"></span>
 	<span class="fa fa-arrow-down scroller-down"></span></div>
 </div>
@@ -77,3 +75,8 @@
     </div>
   </div>
 </div>
+<style>
+	td {
+		cursor: pointer;
+	}
+</style>
