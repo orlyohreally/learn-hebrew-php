@@ -85,6 +85,7 @@
 	$("#list td").click(function(){
 		const el = $(this).parent().find("input[type=checkbox]");
 		$(el).prop('checked', !$(el).prop('checked'));
+		count_selected();
 	});
 	function update_list(old_name, name) {console.log(old_name, name);
 		$.ajax({
