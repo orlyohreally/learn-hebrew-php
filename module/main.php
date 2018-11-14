@@ -65,8 +65,7 @@
 								echo '<div class="container mb-5 mt-5" id="lists">
 										<div class="row">
 											<div class="col-12">
-												<h1 class="text-center">Списки слов | רשימות מילים
-מילים</h1>
+												<h1 class="text-center">Списки слов | רשימות מילים</h1>
 											</div>
 										</div>
 										<div class="row">';
