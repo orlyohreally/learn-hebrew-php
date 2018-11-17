@@ -8,7 +8,7 @@
 	}
 	else $id = 0;
 
-	if($res = $conn->query('select w.*, topic_id, e.name exception, v.infinitive, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
+	if($res = $conn->query('select w.*, topic_id, e.name exception, past_ms, v.infinitive, v.ms, v.fs, v.mp, v.fp, v.form_id from word w left join pl_exception e on e.id = w.exception_id left join verb v on w.verb_id = v.id where w.id = '.$id)) {
 		if($row = $res->fetch_assoc()) {
 			$word = $row['word'];
 			$translation = $row['translation'];
@@ -23,6 +23,7 @@
 			$fs = $row['fs'];
 			$fp = $row['fp'];
 			$mp = $row['mp'];
+			$past_ms = $row['past_ms'];
 			$form_id = $row['form_id'];
 			$verb_id = $row['verb_id'];
 			$infinitive = $row['infinitive'];
@@ -42,6 +43,7 @@
 			$fs = '';
 			$fp = '';
 			$mp = '';
+			$past_ms = '';
 			$form_id = '';
 			$verb_id = '';
 			$infinitive = '';
@@ -147,6 +149,10 @@
 						<div class="form-group">
 							<label for="translation_input">Мн.ч. ж.р.</label>
 							<input type="text" value = "<?php echo $fp;?>" class="form-control" id="fp_input" aria-describedby="Мн.ч. ж.р." placeholder="Мн.ч. ж.р.">
+						</div>
+						<div class="form-group">
+							<label for="past_ms_input">Прош. вр.</label>
+							<input type="text" value = "<?php echo $past_ms;?>" class="form-control" id="past_ms_input" aria-describedby="Прош. вр." placeholder="Прош. вр.">
 						</div>
 						<div class="form-group">
 							<label for="form_id_input">Форма</label>
@@ -307,6 +313,18 @@
 										</div>
 										<div class="col-9 text-right">
 											<span><?php echo $fp;?></span>
+										</div>
+									</div
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-3">
+											<strong>Прош. вр.</strong>
+										</div>
+										<div class="col-9 text-right">
+											<span><?php echo past_ms;?></span>
 										</div>
 									</div
 								</div>

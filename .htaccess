@@ -12,6 +12,7 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI} "/css" [OR]
 RewriteCond %{REQUEST_URI} "/js" [OR]
 RewriteCond %{REQUEST_URI} "/ajax" [OR]
+RewriteCond %{REQUEST_URI} "/download" [OR]
 RewriteCond %{REQUEST_URI} "/includes" [OR]
 RewriteCond %{REQUEST_URI} "/plugins" [OR]
 RewriteCond %{REQUEST_URI} "/img"

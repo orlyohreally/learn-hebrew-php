@@ -78,7 +78,7 @@ else
 	$topic_id = 0;
 if($partofspeech == 'verb') {//it's a verb
 	if($id == 0 || !isset($verb_id)) {//new word or changed to verb
-		$sql = 'insert into verb (ms, fs, mp, fp, translation, form_id, infinitive) values ('.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', "'.$translation.'", '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').')';
+		$sql = 'insert into verb (ms, fs, mp, fp, past_ms, translation, form_id, infinitive) values ('.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', '.(isset($_POST['past_ms']) ? 'lower("'.addslashes($_POST['past_ms']).'")' : 'null').', "'.$translation.'", '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').')';
 		if($list = $conn->query($sql)) {
 			$verb_id = $conn->insert_id;
 		}
@@ -88,7 +88,7 @@ if($partofspeech == 'verb') {//it's a verb
 		}
 	}
 	else {
-		$sql = 'update verb set ms = '.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', fs = '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', mp = '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', fp = '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', translation = "'.$translation.'", form_id = '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', infinitive = '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').' where id = '.$verb_id;
+		$sql = 'update verb set ms = '.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', fs = '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', mp = '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', fp = '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', past_ms = '.(isset($_POST['past_ms']) ? 'lower("'.addslashes($_POST['past_ms']).'")' : 'null').', translation = "'.$translation.'", form_id = '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', infinitive = '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').' where id = '.$verb_id;
 		if($list = $conn->query($sql)) {
 		}
 		else {

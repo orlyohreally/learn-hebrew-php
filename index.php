@@ -21,7 +21,7 @@
 			break;
 		case 'verbs':
 			include 'header.php';
-			include 'module/verbs.php';
+			include 'module/verbs2.php';
 			break;
 		case 'nouns_exceptions':
 			include 'header.php';

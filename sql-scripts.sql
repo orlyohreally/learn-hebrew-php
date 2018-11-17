@@ -68,7 +68,8 @@ insert into page (title, description, url) values ('Список исключе�
 drop table verb_form;
 create table verb_form (
 	id int not null auto_increment,
-	form varchar(200) not  null,
+	form varchar (200) not  null,
+	name varchar (10),
 	primary key (id)
 );
 insert into verb_form (form) values ('סוֹסֵס - סוֹסֶסֶת - סוֹססים/וֹת');
@@ -81,6 +82,7 @@ create table verb (
 	fs varchar(200) not  null,
 	mp varchar(200) not  null,
 	fp varchar(200) not  null,
+	past_ms varchar(200),
 	translation varchar(200) CHARACTER SET utf8  not  null,
 	form_id int,
 	primary key (id),
