@@ -9,6 +9,8 @@ Learn Hebrew is a PHP 7 web-application to help with learning Hebrew which offer
 * added article management to show rules
 * updated word form
 * added new task - typing in infinitive of displayed verb
+* added topics to words
+* added filters to word lists
 ## Built with
 * [PHP 7](http://php.net/) - popular general-purpose scripting language
 * [Bootstrap 4](https://getbootstrap.com/) - Bootstrap is an open source toolkit for developing with HTML, CSS, and JS

@@ -186,6 +186,22 @@
 							?>
 							</select>
 						</div>
+
+						<div class="form-group">
+							<input style="margin-left: 0;" class="form-check-input" type="checkbox" value="" id="add_new_topic_input">
+							<label class="form-check-label" for="add_new_topic_input">Создать новую теме</label>
+						</div>
+						<div class="form-group" style="display: none;">
+							<div class="form-group">
+								<label for="new_topic_input">Новая тема</label>
+								<input type="text" value = "" class="form-control" id="new_topic_input" aria-describedby="Новая тема" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="new_topic_input">Slug новой темы</label>
+								<input type="text" value = "" class="form-control" id="new_topic_slug_input" aria-describedby="Slug новой темы" placeholder="">
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label for="comment_textarea">Примечание</label>
 							<textarea class="form-control" id="comment_textarea" aria-describedby="Примечание" placeholder="Примечание"><?php echo $comment;?></textarea>

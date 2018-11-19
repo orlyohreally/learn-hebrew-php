@@ -76,6 +76,21 @@ if(isset($_POST['topic_id']))
 	$topic_id = (int)$_POST['topic_id'];
 else
 	$topic_id = 0;
+
+if(isset($_POST['add_new_topic']) && ($_POST['add_new_topic'] == 'true')) {
+	$new_topic = addslashes($_POST['new_topic']);
+	$new_topic_slug = addslashes($_POST['new_topic_slug']);
+	if($list = $conn->query('insert into topic (name, slug) values ("'.$new_topic.'", "'.$new_topic_slug.'")')) {
+		$topic_id = $conn->insert_id;
+	}
+	else {
+		$res['msg'] = $conn->error;
+		echo $conn->error;
+		echo json_encode($res);
+		die();
+	}
+}
+
 if($partofspeech == 'verb') {//it's a verb
 	if($id == 0 || !isset($verb_id)) {//new word or changed to verb
 		$sql = 'insert into verb (ms, fs, mp, fp, past_ms, translation, form_id, infinitive) values ('.(isset($_POST['ms']) ? 'lower("'.addslashes($_POST['ms']).'")' : 'null').', '.(isset($_POST['fs']) ? 'lower("'.addslashes($_POST['fs']).'")' : 'null').', '.(isset($_POST['mp']) ? 'lower("'.addslashes($_POST['mp']).'")' : 'null').', '.(isset($_POST['fp']) ? 'lower("'.addslashes($_POST['fp']).'")' : 'null').', '.(isset($_POST['past_ms']) ? 'lower("'.addslashes($_POST['past_ms']).'")' : 'null').', "'.$translation.'", '.(isset($_POST['form_id']) ? (int)$_POST['form_id'] : 'null').', '.(isset($_POST['infinitive']) ? 'lower("'.addslashes($_POST['infinitive']).'")' : 'null').')';
