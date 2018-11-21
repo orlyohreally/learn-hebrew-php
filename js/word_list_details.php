@@ -29,7 +29,7 @@
 					add_words(list, <?php echo $list_id?>);
 				}
 				else {
-					utils.showNotif($(".alert"), data.msg, 'danger', 600);
+					utils.showNotif($("#training_alert"), data.msg, 'danger', 600);
 				}
 			},
 			error: function(data) {
@@ -46,10 +46,10 @@
 			success: function(data) {
 				console.log('success', data);
 				if(data.status == 'success') {
-					utils.showNotif($(".alert"), 'Список успешно был обновлен', 'success', 600);
+					utils.showNotif($("#training_alert"), 'Список успешно был обновлен', 'success', 600);
 				}
 				else {
-					utils.showNotif($(".alert"), data.msg, 'danger', 600);
+					utils.showNotif($("#training_alert"), data.msg, 'danger', 600);
 				}
 				utils.deloader($("#update_list"));
 			},
@@ -70,7 +70,7 @@
 			reset_list(list, <?php echo $list_id?>);
 		}
 		else {
-			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
+			utils.showNotif($("#training_alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
 		}
 	});
 	$("input.select-all").on('change', function() {//select or unselect al words
@@ -148,7 +148,7 @@
 			utils.deloader($("#start_training"));
 		}
 		else {
-			utils.showNotif($(".alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
+			utils.showNotif($("#training_alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
 			utils.deloader($("#start_training"));
 		}
 	});
@@ -180,6 +180,34 @@
 				console.log('error', data);
 				utils.deloader($(obj).children('.card-header'));
 				utils.showNotif($("#choose-option.alert"), 'Ошибка!', 'danger', 600);
+			}
+		});
+	}
+
+	//excell
+	function excell_words() {
+		var list = [];
+		$("td input[oid]").each(function(i, el) {
+			if($(el).prop('checked'))
+				list.push($(el).attr('oid'));
+		});
+		$.ajax({
+			method: 'POST',
+			data: 'words=' + JSON.stringify(list),
+			dataType: 'json',
+			url: '/ajax/create_words_excell.php',
+			success: function(data) {
+				console.log('success', data);
+				if(data.status == 'success') {
+					window.location.href = '/download/words.php?code=' + data.code
+				}
+				else {
+					utils.showNotif($("#excell_words"), data.msg, 'danger', 600);
+				}
+			},
+			error: function(data) {
+				console.log('error', data);
+				utils.showNotif($("#excell_words"), 'Ошибка!', 'danger', 600);
 			}
 		});
 	}

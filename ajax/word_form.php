@@ -364,7 +364,7 @@
 											<strong>Прош. вр.</strong>
 										</div>
 										<div class="col-9 text-right">
-											<span><?php echo past_ms;?></span>
+											<span><?php echo $past_ms;?></span>
 										</div>
 									</div
 								</div>
