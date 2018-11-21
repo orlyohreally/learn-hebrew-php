@@ -12,7 +12,7 @@ if(!file_exists($file) || (time() - filemtime($file) > $cache_life)) {
 	$spreadsheet = new Spreadsheet();
 	$sheet = $spreadsheet->getActiveSheet();
 
-	if($list = $conn->query('select f.id form_id, v.past_ms, f.name v_group, v.id, infinitive, ms, fs, mp, fp, translation, form from verb v, verb_form f where f.id = v.form_id order by form_id, ms, translation')) {
+	if($list = $conn->query('select GROUP_CONCAT(p.name SEPARATOR ", ") prepositions, f.id form_id, v.past_ms, f.name v_group, v.id, infinitive, ms, fs, mp, fp, translation, form from verb v left join verb_preposition vp on v.id = vp.verb_id left join preposition p on p.id = vp.preposition_id, verb_form f where f.id = v.form_id group by f.id, v.past_ms, f.name, v.id, infinitive, ms, fs, mp, fp, translation, form order by form_id, ms, translation')) {
 		$form_id = 0;
 		$row_counter = 0;
 
@@ -36,7 +36,7 @@ if(!file_exists($file) || (time() - filemtime($file) > $cache_life)) {
 				$sheet->setCellValue('A'.$row_counter, $row['translation']);
 				$sheet->setCellValue('B'.$row_counter, $row['past_ms']);
 				$sheet->setCellValue('C'.$row_counter, $row['ms']. ' | '.$row['fs']);
-				$sheet->setCellValue('D'.$row_counter, $row['infinitive']);
+				$sheet->setCellValue('D'.$row_counter, $row['infinitive'].' '.$row['prepositions']);
 				
 			}
 			else {
@@ -45,7 +45,7 @@ if(!file_exists($file) || (time() - filemtime($file) > $cache_life)) {
 				$sheet->getStyle('A'.$row_counter)->getAlignment()->setWrapText(false);
 				$sheet->setCellValue('B'.$row_counter, $row['past_ms']);
 				$sheet->setCellValue('C'.$row_counter, $row['ms']. ' | '.$row['fs']);
-				$sheet->setCellValue('D'.$row_counter, $row['infinitive']);
+				$sheet->setCellValue('D'.$row_counter, $row['infinitive'].' '.$row['prepositions']);
 			}
 			$form_id = $row['form_id'];
 		}

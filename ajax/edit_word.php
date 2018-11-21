@@ -119,7 +119,6 @@ if($partofspeech == 'verb') {//it's a verb
 				$new_preposiotions = explode(',', addslashes($_POST['prepositions']));
 				foreach ($new_preposiotions as $value) {
 					$sql = 'insert into verb_preposition (verb_id, preposition_id) values('.$verb_id.', '.(int)$value.')';
-					$res['sql'] = 'insert into verb_preposition (verb_id, preposition_id) values('.$verb_id.', '.(int)$value.')';
 					if($list = $conn->query($sql)) {
 						$saved = $saved + 1;
 					}

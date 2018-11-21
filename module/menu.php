@@ -6,6 +6,7 @@
 	<div class="collapse navbar-collapse " id="navbarCollapse">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item"><a class = "nav-link text-center" href="/words">Список слов<hr>רשימת מילים</a></li>
+			<li class="nav-item"><a class = "nav-link text-center" href="/verbs">Список глаголов <hr> רשימת פעלים</a></li>
 			<li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Тесты<hr>מבחנים</a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">

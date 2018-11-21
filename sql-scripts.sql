@@ -206,8 +206,3 @@ create table verb_preposition (
 );
 create index verb_prep_prep_id on verb_preposition (preposition_id);
 create index verb_prep_verb_id on verb_preposition (verb_id);
-
-
-insert into verb_preposition (verb_id, preposition_id) values (2, 2);
-insert into verb_preposition (verb_id, preposition_id) values (2, 4);
-insert into verb_preposition (verb_id, preposition_id) values (3, 4);
