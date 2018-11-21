@@ -110,6 +110,33 @@ if($partofspeech == 'verb') {//it's a verb
 			$res['msg'] = $conn->error;
 		}
 	}
+	//adding prepositions
+	if(isset($_POST['prepositions'])) {
+		$sql = 'delete from verb_preposition where verb_id = '.$verb_id;
+		if($list = $conn->query($sql)) {
+			$saved = 0;
+			if(addslashes($_POST['prepositions']) != 'null') {
+				$new_preposiotions = explode(',', addslashes($_POST['prepositions']));
+				foreach ($new_preposiotions as $value) {
+					$sql = 'insert into verb_preposition (verb_id, preposition_id) values('.$verb_id.', '.(int)$value.')';
+					$res['sql'] = 'insert into verb_preposition (verb_id, preposition_id) values('.$verb_id.', '.(int)$value.')';
+					if($list = $conn->query($sql)) {
+						$saved = $saved + 1;
+					}
+				}
+				if($saved != count($new_preposiotions)) {
+					$res['msg'] = 'Произошла ошибка';
+					echo json_encode($res);
+					die();
+				}
+			}
+		}
+		else {
+			$res['msg'] = $conn->error;
+			echo json_encode($res);
+			die();
+		}
+	}
 }
 if($id == 0) {
 	if($list = $conn->query('insert into word (word, translation, gender, plural, plural_translation, exception_id, part_of_speech, comment, verb_id, topic_id) values (lower("'.$word.'"), lower("'.$translation.'"), "'.$gender.'", lower("'.$plural.'"), lower("'.$pl_translation.'"), '. ($exception_id > 0 ? $exception_id : 'null').', "'.$partofspeech.'"'.', "'.$comment.'", '.(isset($verb_id) ? $verb_id : 'null').', '.($topic_id > 0 ? $topic_id : 'null').')')) {

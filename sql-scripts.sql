@@ -186,3 +186,28 @@ insert into sentence_subjects (subject, gender) values ('הם', 'mp');
 insert into sentence_subjects (subject, gender) values ('הן', 'fp');
 
 
+
+create table preposition (
+	id int not null auto_increment,
+	name varchar(50) CHARACTER SET utf8 not null,
+	primary key (id)
+);
+insert into preposition(name) values('ב');
+insert into preposition(name) values('ל');
+insert into preposition(name) values('את');
+insert into preposition(name) values('על');
+create table verb_preposition (
+	id int not null auto_increment,
+	verb_id int not null,
+	preposition_id int not null,
+	primary key (id),
+	foreign key (preposition_id) references preposition(id),
+	foreign key (verb_id) references verb(id)
+);
+create index verb_prep_prep_id on verb_preposition (preposition_id);
+create index verb_prep_verb_id on verb_preposition (verb_id);
+
+
+insert into verb_preposition (verb_id, preposition_id) values (2, 2);
+insert into verb_preposition (verb_id, preposition_id) values (2, 4);
+insert into verb_preposition (verb_id, preposition_id) values (3, 4);

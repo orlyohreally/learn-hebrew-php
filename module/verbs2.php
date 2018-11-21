@@ -10,7 +10,7 @@
 		</div>
 		<div class="col-12 mt-4 mb-2">
 				<?php
-					if($list = $conn->query('select f.id form_id, v.past_ms, f.name v_group, v.id, infinitive, ms, fs, mp, fp, translation, form from verb v, verb_form f where f.id = v.form_id order by form_id, ms, translation')) {
+					if($list = $conn->query('select GROUP_CONCAT(p.name SEPARATOR ", ") prepositions, f.id form_id, v.past_ms, f.name v_group, v.id, infinitive, ms, fs, mp, fp, translation, form from verb v left join verb_preposition vp on v.id= vp.verb_id left join preposition p on p.id = vp.preposition_id, verb_form f where f.id = v.form_id group by f.id, v.past_ms, f.name, v.id, infinitive, ms, fs, mp, fp, translation, form order by form_id, ms, translation')) {
 						$form_id = 0;
 						while($row = $list->fetch_assoc()) {
 							if ($form_id != $row['form_id']) {
@@ -33,7 +33,7 @@
 									echo '<tr><td>'.$row['translation'].'</td>';
 									echo '<td class="hebrew">'.$row['past_ms'].'</td>';
 									echo '<td class="hebrew">'.$row['ms']. ' | '.$row['fs'].'</td>';
-									echo '<td class="hebrew">'.$row['infinitive'].'</td></tr>';
+									echo '<td class="hebrew">'.$row['infinitive'].' '.$row['prepositions'].'</td></tr>';
 									
 									
 							}
@@ -41,7 +41,7 @@
 								echo '<tr><td>'.$row['translation'].'</td>';
 									echo '<td class="hebrew">'.$row['past_ms'].'</td>';
 									echo '<td class="hebrew">'.$row['ms']. ' | '.$row['fs'].'</td>';
-									echo '<td class="hebrew">'.$row['infinitive'].'</td></tr>';
+									echo '<td class="hebrew">'.$row['infinitive'].' '.$row['prepositions'].'</td></tr>';
 							}
 							$form_id = $row['form_id'];
 						}

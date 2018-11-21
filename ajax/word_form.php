@@ -28,6 +28,14 @@
 			$verb_id = $row['verb_id'];
 			$infinitive = $row['infinitive'];
 			$topic_id = $row['topic_id'];
+			$prepositions = [];
+			if($part_of_speech == 'verb') {
+				if($res = $conn->query('select p.id prep from verb v left join verb_preposition vp on vp.verb_id = v.id left join preposition p on p.id = vp.preposition_id where v.id = '.$verb_id)) {
+					while($row = $res->fetch_assoc()) {
+						$prepositions[] = $row['prep'];
+					}	
+				}
+			}
 		}
 		else {
 			$word = '';
@@ -48,6 +56,7 @@
 			$verb_id = '';
 			$infinitive = '';
 			$topic_id = '';
+			$prepositions = [];
 		}
 	}
 
@@ -165,6 +174,21 @@
 											if ($form_id==$row['id'])
 												echo 'selected ';
 											echo 'value="'.$row['id'].'">'.$row['form'].'</option>';
+										}
+									}
+							?>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="prepositions_input">Предлоги</label>
+							<select multiple id="prepositions_input" aria-describedby="Предлоги" class="form-control">
+							<?php echo '11111 '.$verb_id; print_r($prepositions);
+									if($res = $conn->query('select * from preposition')) {
+										while($row = $res->fetch_assoc()) {
+											echo '<option ';
+											if (in_array($row['id'], $prepositions))
+												echo 'selected ';
+											echo 'value="'.$row['id'].'">'.$row['name'].'</option>';
 										}
 									}
 							?>
