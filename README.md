@@ -17,3 +17,4 @@ Learn Hebrew is a PHP 7 web-application to help with learning Hebrew which offer
 * [MarkItUp](http://markitup.jaysalvat.com/home/) - markItUp! universal markup jQuery editor
 * [Font Awesome](https://fontawesome.com/) - the web’s most popular icon set and toolkit
 * [URLify for PHP](https://www.phpclasses.org/package/10229-PHP-Transliterate-non-ASCII-characters.html) - A PHP port of URLify.js from the Django project + str_transliterate from "Portable UTF-8".
+* [PhpSpreadsheet](https://phpspreadsheet.readthedocs.io/) - library written in pure PHP and providing a set of classes that allow you to read from and to write to different spreadsheet file formats, like Excel and LibreOffice Calc

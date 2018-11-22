@@ -37,12 +37,10 @@
 	</div>
 	<div class="row mt-4 mb-2">
 		<div class="col-12 mb-2 selected-counter"></div>
-		<?php if(isset($_SESSION['user_id'])) {?>
-			<div class="col-12 mb-3">
-				<button type = "button" class="btn btn-success fa fa-edit mb-1" onclick="excell_words();" role="button">Выгрузить выбранные слова в Excell</button>
-				<div id="excell_words" class="alert alert-dismissible fade show" role="alert"></div>
-			</div>
-		<?php }?>
+		<div class="col-12 mb-3">
+			<button type = "button" class="btn btn-success fa fa-edit mb-1" onclick="excell_words();" role="button">Выгрузить в Excell</button>
+			<div id="excell_words" class="alert alert-dismissible fade show" role="alert"></div>
+		</div>
 		<div class="col-12 scrollable-table">
 			<table id="list" class="table table-striped table-bordered display nowrap" style="width:100%">
 				<thead>
