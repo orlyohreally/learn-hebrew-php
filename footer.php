@@ -4,11 +4,11 @@
 			<span class="copyright">Copyright &copy; 2018 <a href="https://orlyknop.herokuapp.com/">orlyohreally</a></span>
 		  </div>
 		</footer>
-		<script src = "../js/jquery.min.js"></script>
-        <script src = "../js/bootstrap-4.min.js"></script>
-        <script src = "../js/bootbox.min.js"></script>
-        <script src = "../js/utils.js"></script>
-		
+		<script src = "/js/jquery.min.js"></script>
+        <script src = "/js/bootstrap-4.min.js"></script>
+        <script src = "/js/bootbox.min.js"></script>
+        <script src = "/js/utils.js"></script>
+
 		<?php
 			switch($out) {
 				case 'main':
@@ -27,6 +27,9 @@
 					break;
 				case 'training':
 					require 'js/training.php';
+					echo '<script src="https://unpkg.com/web-animations-js@2.3.1/web-animations.min.js"></script>';
+					echo '<script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>';
+					echo '<script src="plugins/muuri/muuri.js"></script>';
 					break;
 				case 'tests':
 					require 'js/tests_scripts.php';

@@ -11,6 +11,7 @@ $code = addslashes($_GET['code']);
 $word_count = $task == 'multichoice' ? 4 : ($task == 'spelling' ? 1 : 0);
 $all_words = $_GET['all_words'] == 'true' ? true : false;
 $words = [];
+$prepositions = [];
 $q = [];
 $res = [];
 $res['status'] = 'error';
@@ -103,6 +104,53 @@ else if($task == "infinitive") {
 			}
 		}
 	}
+}
+else if($task == "prepositions") {
+	$min_prep = 5;
+	if($list = $conn->query('select v.id v_id, v.ms, v.fs, v.mp, v.fp, p.name preposition, infinitive, p.id p_id
+			from word w, training t, verb v join verb_preposition vp on v.id = vp.verb_id join preposition p on vp.preposition_id = p.id
+			where w.id = t.word_id and v.id = w.verb_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '2').' and part_of_speech = "verb" and v.infinitive is not null and v.infinitive != "" and code = "'.$code.'" and answered = false and tries < 3')) {
+		if(mysqli_num_rows($list) < $min_prep) {
+			$min_prep = mysqli_num_rows($list);
+		}
+
+	}
+	if($list = $conn->query('select v.id v_id, v.ms, v.fs, v.mp, v.fp, p.name preposition, infinitive, p.id p_id
+			from word w, training t, verb v join verb_preposition vp on v.id = vp.verb_id join preposition p on vp.preposition_id = p.id
+			where w.id = t.word_id and v.id = w.verb_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '2').' and part_of_speech = "verb" and v.infinitive is not null and v.infinitive != "" and code = "'.$code.'" and answered = false and tries < 3 order by rand() limit '.$min_prep)) {
+		while($row = $list->fetch_assoc()) {
+			$word = [];
+			$word['oid'] = $row['v_id'];
+			$word['name'] = $row['infinitive'];
+			$words[] = $word;
+			
+			$prep = [];
+			$prep['oid'] = $row['p_id'];
+			$prep['name'] = $row['preposition'];
+			$prepositions[] = $prep;
+			
+		}
+		if(sizeof($words) > 0) {
+			$res['words'] = $words;
+			shuffle($prepositions);
+			$res['prepositions'] =  $prepositions;
+			$res['status'] = 'success';
+		}
+		else {
+			$sql = 'select p.name answer, infinitive word
+				from word w, training t, verb v join verb_preposition vp on v.id = vp.verb_id join preposition p on vp.preposition_id = p.id
+				where w.id = t.word_id and v.id = w.verb_id and webuser_id='.(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '2').' and part_of_speech = "verb" and v.infinitive is not null and v.infinitive != "" and code = "'.$code.'"';
+			if($list = $conn->query($sql)) {
+				$results = [];
+				while($row = $list->fetch_assoc()) {
+					$results[] = $row;
+				}
+				$res['results'] = $results;
+				$res['status'] = 'success';
+			}
+		}
+	}
+
 }
 echo json_encode($res);
 ?>

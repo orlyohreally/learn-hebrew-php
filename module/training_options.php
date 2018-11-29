@@ -41,4 +41,10 @@
         <p class="card-text">Определение инфинитива глаголы</p>
     </div>
 </div>
+<div onclick="start_training(this, 'prepositions', 'he-he')" class="card trainig-option text-white bg-info mb-3">
+    <div class="card-header bg-info">Определение предлога</div>
+    <div class="card-body p-2">
+        <p class="card-text">Определение предлогов у глаголов</p>
+    </div>
+</div>
 <div id="choose-option" class="alert alert-dismissible fade show" role="alert"></div>
