@@ -86,6 +86,10 @@ nav.navbar hr {
 .markItUp {
 	width: 100%!important;
 }
+
+.list-group {
+	user-select: text;
+}
 /****************/
 /*    Footer   */
 /**************/
