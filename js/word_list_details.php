@@ -7,9 +7,28 @@
 		utils.scrollerUp($('.scroller-up'));
 		utils.scrollerDown($('.scroller-down'));
 	});
-	$("input").on('change', function() {
+
+	$("input.select-all").on('change', function() {//select or unselect al words
+		if($(this).prop('checked')) {
+			$("td input[oid]").prop('checked', true);
+		}
+		else {
+			$("td input[oid]").prop('checked', false);
+		}
 		count_selected();
 	});
+	
+	$("td input").on('change', function() {
+		count_selected();
+	});
+
+	$("#list td").click(function(){
+		const el = $(this).parent().find("input[type=checkbox]");
+		if(!$(this).children('input').length)
+			$(el).trigger('click');
+		
+	});
+
 	function check(element, attr, name, check) {
 		$("input[type='checkbox'][" + attr + "='" + name + "']").prop('checked', check);
 		$(element).attr('onclick', "check(this, '" + attr + "', '" + name + "', "+ (!check) + ")");
@@ -73,20 +92,7 @@
 			utils.showNotif($("#training_alert"), 'В списке должно быть более 4 слов | הרשימה חייבת להכיל לפחות 4 מילים', 'danger', 1000);
 		}
 	});
-	$("input.select-all").on('change', function() {//select or unselect al words
-		if($(this).prop('checked')) {
-			$("td input[oid]").prop('checked', true);
-		}
-		else {
-			$("td input[oid]").prop('checked', false);
-		}
-		count_selected();
-	});
-	$("#list td").click(function(){
-		const el = $(this).parent().find("input[type=checkbox]");
-		$(el).prop('checked', !$(el).prop('checked'));
-		count_selected();
-	});
+	
 	function update_list(old_name, name) {console.log(old_name, name);
 		$.ajax({
 			method: 'POST',
